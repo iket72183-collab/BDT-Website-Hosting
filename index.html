@@ -1,175 +1,3 @@
-Skip to content
-Library
-
-Apps
-
-Open a new tab to test authentication and file uploads.
-Published your App
-/**
-
-@license
-SPDX-License-Identifier: Apache-2.0
-*/
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import {
-Crown,
-Sparkles,
-ArrowRight,
-Mail,
-Home,
-Plus,
-Calendar,
-UserCircle,
-Users,
-Star
-} from 'lucide-react';
-
-const TALENT_DATA = [
-{ id: 1, name: 'Elena Vance', category: 'High Fashion', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80', featured: true },
-{ id: 2, name: 'Marcus Chen', category: 'Commercial', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80', featured: false },
-{ id: 3, name: 'Sasha Grey', category: 'Editorial', image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=800&q=80', featured: true },
-{ id: 4, name: 'Julian Ross', category: 'Digital', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=800&q=80', featured: false },
-{ id: 5, name: 'Amara Okafor', category: 'Runway', image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80', featured: false },
-{ id: 6, name: 'Dante Silva', category: 'Fitness', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80', featured: false },
-];
-
-export default function App() {
-const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-const [isSubmitted, setIsSubmitted] = useState(false);
-const [activeTab, setActiveTab] = useState('home');
-
-const handleSubmit = (e: React.FormEvent) => {
-e.preventDefault();
-console.log('Form submitted:', formState);
-setIsSubmitted(true);
-setTimeout(() => setIsSubmitted(false), 5000);
-};
-
-const renderContent = () => {
-switch (activeTab) {
-case 'talent':
-return (
-<motion.section
-initial={{ opacity: 0 }}
-animate={{ opacity: 1 }}
-className="w-full px-6 pt-12 pb-32"
->
-<div className="mb-16 text-center">
-<motion.div
-initial={{ opacity: 0, y: 10 }}
-animate={{ opacity: 1, y: 0 }}
-className="inline-block px-3 py-1 rounded-full border border-primary/20 bg-primary/5 mb-4"
->
-<span className="text-[9px] font-bold uppercase tracking-[0.3em] text-primary">The Roster</span>
-</motion.div>
-<h2 className="font-headline text-5xl font-black tracking-tighter mb-4">Elite Presence.</h2>
-<p className="text-on-surface-variant text-sm font-medium max-w-[240px] mx-auto leading-relaxed">Curating the world's most distinguished talent for global impact.</p>
-</div>
-
-        <div className="grid grid-cols-2 gap-x-4 gap-y-8">
-          {TALENT_DATA.map((talent, index) => (
-            <motion.div 
-              key={talent.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
-              className="relative flex flex-col group"
-            >
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-4 border border-outline-variant/10 shadow-2xl">
-                <img 
-                  src={talent.image} 
-                  alt={talent.name} 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-surface-dim/80 via-transparent to-transparent opacity-60"></div>
-                
-                {talent.featured && (
-                  <div className="absolute top-3 left-3 px-2 py-1 rounded-md bg-primary/90 backdrop-blur-sm shadow-lg">
-                    <span className="text-[7px] font-black uppercase tracking-widest text-on-primary">Featured</span>
-                  </div>
-                )}
-                
-                <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
-                  <div className="w-8 h-8 rounded-full bg-surface-dim/80 backdrop-blur-md flex items-center justify-center border border-primary/30">
-                    <Star className="w-3.5 h-3.5 text-primary fill-primary" />
-                  </div>
-                </div>
-              </div>
-              
-              <div className="px-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="w-1 h-1 rounded-full bg-secondary"></span>
-                  <span className="text-[8px] font-bold uppercase tracking-widest text-secondary/70">{talent.category}</span>
-                </div>
-                <h4 className="font-headline text-lg font-bold text-on-surface leading-tight group-hover:text-primary transition-colors">{talent.name}</h4>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-20 p-8 rounded-3xl border border-primary/10 bg-surface-container-low text-center"
-        >
-          <h3 className="font-headline text-xl font-bold mb-2">Join the Roster</h3>
-          <p className="text-on-surface-variant text-xs mb-6">We are always seeking exceptional individuals with unique presence.</p>
-          <button className="px-8 py-3 rounded-xl border border-primary/30 text-primary font-bold text-[10px] uppercase tracking-widest hover:bg-primary hover:text-on-primary transition-all">
-            Apply Now
-          </button>
-        </motion.div>
-      </motion.section>
-    );
-  case 'home':
-  default:
-    return (
-      <>
-        {/* Hero Section */}
-        <section className="relative w-full px-6 pt-12 pb-12 flex flex-col items-center text-center overflow-hidden">
-          {/* Background Visual Layer */}
-          <div className="absolute inset-0 -z-10">
-            <div className="absolute inset-0 z-10 noir-vignette"></div>
-            <motion.img 
-              initial={{ scale: 1.2, opacity: 0 }}
-              animate={{ scale: 1.1, opacity: 0.4 }}
-              transition={{ duration: 2 }}
-              alt="Luxury minimalist architectural interior" 
-              className="w-full h-[120%] object-cover" 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFx2KgdldtyEU2VtuDqD7sMe9ngNMescH335-75QTDnI4D2iN8ZAaV27886KdJUsxnRJ0ALx4IQpFlKkg5pYWnWjzf_0zY7sse_cn1iu0XTy0GpEAqQJdz8VLmhfH6BmNu0MR9Hi0iSHh35v48vQh5MHpkrjIaML2x9__OwUZA4bz-FRuk3vj0ZpTHXkgWMLDIzN9lUyUnIXkz18BNiWACKGTRmz2GU6s4kxUFw_ypLyxLdvxvHJ-PROpnms5-cZkXbaktaO2RSq_M"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          {/* Content */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-primary/30 mb-8"
-          >
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-primary">Limited Engagement</span>
-          </motion.div>
-BDT Talent Group
-Website
-Want users to get these changes? Republish this App.
-The website, the text is too compressed
-BDT Talent Group
-Website
-What is the code
-Can you give me the HTML
-The home page, add "group" to the top, it should be "BDT Talent Group"
-let's change that font color to purple instead of that orange
-Let's change the color to crimson red
-AI-Powered Talent. Human-Centered Culture. | Elevating the next generation of creators. The industry's watching. 🚀 add in the mission statement, ensure the rest of the page is aligned with this
-You have reached your free quota limit
-You have reached your free quota limit
-give me the code
-You have reached your free quota limit
-give me the code for this
-Paste the full App.tsx content here
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -184,6 +12,7 @@ import {
   Users,
   Star
 } from 'lucide-react';
+
 const TALENT_DATA = [
   { id: 1, name: 'Elena Vance', category: 'High Fashion', image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80', featured: true },
   { id: 2, name: 'Marcus Chen', category: 'Commercial', image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=800&q=80', featured: false },
@@ -192,15 +21,18 @@ const TALENT_DATA = [
   { id: 5, name: 'Amara Okafor', category: 'Runway', image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80', featured: false },
   { id: 6, name: 'Dante Silva', category: 'Fitness', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80', featured: false },
 ];
+
 export default function App() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
     setTimeout(() => setIsSubmitted(false), 5000);
   };
+
   const renderContent = () => {
     switch (activeTab) {
       case 'talent':
@@ -223,6 +55,7 @@ export default function App() {
                 Curating the world's most distinguished talent for global impact.
               </p>
             </div>
+
             <div className="grid grid-cols-2 gap-x-4 gap-y-10">
               {TALENT_DATA.map((talent, index) => (
                 <motion.div
@@ -241,17 +74,20 @@ export default function App() {
                       referrerPolicy="no-referrer"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+
                     {talent.featured && (
                       <div className="absolute top-3 left-3 px-2 py-1 rounded-md bg-gold/90 backdrop-blur-sm shadow-lg">
                         <span className="text-[7px] font-black uppercase tracking-widest text-black">Featured</span>
                       </div>
                     )}
+
                     <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0">
                       <div className="w-8 h-8 rounded-full bg-black/80 backdrop-blur-md flex items-center justify-center border border-gold/30">
                         <Star className="w-3.5 h-3.5 text-gold fill-gold" />
                       </div>
                     </div>
                   </div>
+
                   <div className="px-1 space-y-1">
                     <div className="flex items-center gap-2">
                       <span className="w-1 h-1 rounded-full bg-silver" />
@@ -262,6 +98,7 @@ export default function App() {
                 </motion.div>
               ))}
             </div>
+
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -278,6 +115,7 @@ export default function App() {
             </motion.div>
           </motion.section>
         );
+
       case 'home':
       default:
         return (
@@ -296,6 +134,7 @@ export default function App() {
                   referrerPolicy="no-referrer"
                 />
               </div>
+
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -305,6 +144,7 @@ export default function App() {
                 <span className="w-2 h-2 rounded-full bg-gold animate-pulse" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold">The Industry's Watching 🚀</span>
               </motion.div>
+
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -315,6 +155,7 @@ export default function App() {
                 Elite Presence.<br />
                 <span style={{ color: '#DC143C' }} className="italic">Next Generation.</span>
               </motion.h1>
+
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -324,6 +165,7 @@ export default function App() {
               >
                 Elevating the next generation of creators — where AI-powered discovery meets human-centered culture.
               </motion.p>
+
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -337,6 +179,7 @@ export default function App() {
                 </a>
               </motion.div>
             </section>
+
             {/* Mission Statement */}
             <section className="w-full px-6 mt-4 mb-6">
               <motion.div
@@ -360,6 +203,7 @@ export default function App() {
                 </p>
               </motion.div>
             </section>
+
             {/* Bento Cards */}
             <section className="w-full px-6 grid grid-cols-1 gap-4 mt-2 mb-16">
               <motion.div
@@ -378,6 +222,7 @@ export default function App() {
                   View Roster <ArrowRight className="w-3 h-3" />
                 </div>
               </motion.div>
+
               <div className="flex gap-4">
                 <motion.div
                   whileHover={{ scale: 1.02 }}
@@ -395,15 +240,18 @@ export default function App() {
                 </motion.div>
               </div>
             </section>
+
             {/* Contact Section */}
             <section className="w-full px-6 mb-24" id="contact">
               <div className="glass-panel rounded-3xl p-8 shadow-2xl relative overflow-hidden">
                 <div className="absolute -top-24 -right-24 w-48 h-48 bg-silver/10 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
+
                 <div className="mb-10 text-center">
                   <h2 className="font-headline text-3xl font-bold mb-3 leading-snug">The Lounge</h2>
                   <p className="text-silver text-sm leading-relaxed">Ready to be part of the next generation? Let's connect.</p>
                 </div>
+
                 <AnimatePresence mode="wait">
                   {!isSubmitted ? (
                     <motion.form
@@ -425,6 +273,7 @@ export default function App() {
                           onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                         />
                       </div>
+
                       <div className="flex flex-col gap-2">
                         <label className="text-[10px] font-bold uppercase tracking-widest text-gold">Email Address</label>
                         <input
@@ -436,6 +285,7 @@ export default function App() {
                           onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                         />
                       </div>
+
                       <div className="flex flex-col gap-2">
                         <label className="text-[10px] font-bold uppercase tracking-widest text-gold">Inquiry</label>
                         <textarea
@@ -447,6 +297,7 @@ export default function App() {
                           onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                         />
                       </div>
+
                       <button
                         className="w-full py-4 mt-2 bg-transparent text-gold border border-gold/30 rounded-xl font-bold uppercase tracking-[0.25em] text-[10px] hover:bg-gold hover:text-black active:scale-[0.98] transition-all duration-300"
                         type="submit"
@@ -471,6 +322,7 @@ export default function App() {
                     </motion.div>
                   )}
                 </AnimatePresence>
+
                 <div className="mt-10 pt-8 border-t border-white/10 flex flex-col items-center">
                   <a
                     className="text-xs font-bold tracking-widest text-silver flex items-center gap-3 hover:text-gold transition-colors"
@@ -486,6 +338,7 @@ export default function App() {
         );
     }
   };
+
   return (
     <div className="min-h-screen bg-noir text-white font-sans selection:bg-gold selection:text-black overflow-x-hidden">
       {/* Header */}
@@ -506,9 +359,11 @@ export default function App() {
           <Crown className="text-silver w-5 h-5 fill-silver" />
         </motion.div>
       </header>
+
       <main className="relative min-h-screen pt-20 pb-28 flex flex-col items-center">
         {renderContent()}
       </main>
+
       {/* Footer */}
       <footer className="bg-black w-full pt-14 pb-32 px-8 flex flex-col items-center text-center gap-6">
         <div className="text-gold font-headline italic text-xl tracking-widest font-black uppercase">BDT GROUP</div>
@@ -522,6 +377,7 @@ export default function App() {
           © 2024 BDT TALENT GROUP. ALL RIGHTS RESERVED.
         </p>
       </footer>
+
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 w-full h-24 bg-noir/95 backdrop-blur-2xl border-t border-white/5 flex justify-around items-center px-6 pb-4 z-50">
         <button
@@ -537,6 +393,7 @@ export default function App() {
             />
           )}
         </button>
+
         <button
           onClick={() => setActiveTab('talent')}
           className={`relative flex flex-col items-center justify-center gap-1 transition-all duration-300 ${activeTab === 'talent' ? 'text-gold' : 'text-white/35 hover:text-white/60'}`}
@@ -550,6 +407,7 @@ export default function App() {
             />
           )}
         </button>
+
         <div className="flex flex-col items-center justify-center text-white/35 cursor-pointer group">
           <div className="w-12 h-12 rounded-full bg-surface-container border border-gold/20 flex items-center justify-center -mt-8 shadow-2xl group-hover:border-gold group-hover:scale-110 transition-all duration-300 relative overflow-hidden">
             <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -557,10 +415,12 @@ export default function App() {
           </div>
           <span className="font-bold uppercase tracking-widest text-[8px] mt-1">Apply</span>
         </div>
+
         <button className="flex flex-col items-center justify-center gap-1 text-white/35 hover:text-silver transition-colors">
           <Calendar className="w-5 h-5" />
           <span className="font-bold uppercase tracking-widest text-[8px]">Events</span>
         </button>
+
         <button className="flex flex-col items-center justify-center gap-1 text-white/35 hover:text-silver transition-colors">
           <UserCircle className="w-5 h-5" />
           <span className="font-bold uppercase tracking-widest text-[8px]">Access</span>
@@ -569,8 +429,3 @@ export default function App() {
     </div>
   );
 }
-
-Scroll to latest
-
-Make, test, iterate…
-Talent Showcase - Replit
