@@ -79,6 +79,9 @@
     }
 
     .social-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-family: Arial, sans-serif;
       font-size: 0.72rem;
       letter-spacing: 0.12em;
@@ -90,6 +93,23 @@
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.04);
       transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(201, 168, 76, 0.32);
+      background: rgba(201, 168, 76, 0.08);
+      color: #f1e0ac;
+      font-size: 0.56rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      line-height: 1;
+      flex-shrink: 0;
     }
 
     .social-links a:hover {
@@ -147,16 +167,16 @@
     <div class="divider"></div>
     <div class="coming-soon">Official Website Coming Soon</div>
     <div class="social-links">
-      <a href="https://x.com/BDTTalentGroup" target="_blank" rel="noreferrer">X</a>
-      <a href="https://www.tiktok.com/@bdttalentgroup" target="_blank" rel="noreferrer">TikTok</a>
-      <a href="https://www.instagram.com/bdttalentgroup/" target="_blank" rel="noreferrer">Instagram</a>
-      <a href="https://www.threads.com/@bdttalentgroup" target="_blank" rel="noreferrer">Threads</a>
-      <a href="https://www.facebook.com/profile.php?id=61576643010008" target="_blank" rel="noreferrer">Facebook</a>
-      <a href="https://www.linkedin.com/in/isaac-tran-8668033ba/" target="_blank" rel="noreferrer">LinkedIn</a>
-      <a href="https://bsky.app/profile/bdttalentgroup.bsky.social" target="_blank" rel="noreferrer">Bluesky</a>
-      <a href="https://snapchat.com/add/BDTTalentGroup" target="_blank" rel="noreferrer">Snapchat</a>
-      <a href="https://www.reddit.com/u/BDTTalentGroup" target="_blank" rel="noreferrer">Reddit</a>
-      <a href="https://www.youtube.com/channel/UCxnQAWrGGaYikuy-N4YCTNQ" target="_blank" rel="noreferrer">YouTube</a>
+      <a href="https://x.com/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">X</span><span>X</span></a>
+      <a href="https://www.tiktok.com/@bdttalentgroup" target="_blank" rel="noreferrer"><span class="social-icon">TT</span><span>TikTok</span></a>
+      <a href="https://www.instagram.com/bdttalentgroup/" target="_blank" rel="noreferrer"><span class="social-icon">IG</span><span>Instagram</span></a>
+      <a href="https://www.threads.com/@bdttalentgroup" target="_blank" rel="noreferrer"><span class="social-icon">@</span><span>Threads</span></a>
+      <a href="https://www.facebook.com/profile.php?id=61576643010008" target="_blank" rel="noreferrer"><span class="social-icon">f</span><span>Facebook</span></a>
+      <a href="https://www.linkedin.com/in/isaac-tran-8668033ba/" target="_blank" rel="noreferrer"><span class="social-icon">in</span><span>LinkedIn</span></a>
+      <a href="https://bsky.app/profile/bdttalentgroup.bsky.social" target="_blank" rel="noreferrer"><span class="social-icon">BS</span><span>Bluesky</span></a>
+      <a href="https://snapchat.com/add/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">SC</span><span>Snapchat</span></a>
+      <a href="https://www.reddit.com/u/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">R</span><span>Reddit</span></a>
+      <a href="https://www.youtube.com/channel/UCxnQAWrGGaYikuy-N4YCTNQ" target="_blank" rel="noreferrer"><span class="social-icon">YT</span><span>YouTube</span></a>
     </div>
   </div>
 </body>
