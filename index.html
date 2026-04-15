@@ -117,6 +117,153 @@
       border-color: rgba(201, 168, 76, 0.8);
       background: rgba(201, 168, 76, 0.08);
     }
+
+    .contact-card {
+      margin: 38px auto 0;
+      max-width: 760px;
+      padding: 28px;
+      border: 1px solid rgba(201, 168, 76, 0.22);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      text-align: left;
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.24);
+    }
+
+    .contact-eyebrow {
+      font-family: Arial, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #c9a84c;
+    }
+
+    .contact-card h2 {
+      margin-top: 12px;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: #fff;
+    }
+
+    .contact-card p {
+      margin-top: 12px;
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      letter-spacing: 0.03em;
+      color: #bbb;
+    }
+
+    .contact-form {
+      margin-top: 22px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .contact-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .contact-field span {
+      font-family: Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #e2d3a4;
+    }
+
+    .contact-input,
+    .contact-textarea {
+      width: 100%;
+      border: 1px solid rgba(201, 168, 76, 0.22);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .contact-input::placeholder,
+    .contact-textarea::placeholder {
+      color: #777;
+    }
+
+    .contact-input:focus,
+    .contact-textarea:focus {
+      border-color: rgba(201, 168, 76, 0.75);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.08);
+    }
+
+    .contact-textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 14px;
+      margin-top: 4px;
+    }
+
+    .contact-submit {
+      border: 1px solid rgba(201, 168, 76, 0.36);
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(201, 168, 76, 0.16), rgba(201, 168, 76, 0.08));
+      color: #f5e9bf;
+      font-family: Arial, sans-serif;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 14px 22px;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .contact-submit:hover {
+      transform: translateY(-1px);
+      border-color: rgba(201, 168, 76, 0.82);
+      background: linear-gradient(180deg, rgba(201, 168, 76, 0.22), rgba(201, 168, 76, 0.12));
+    }
+
+    .contact-note {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      line-height: 1.7;
+      color: #8f8f8f;
+    }
+
+    .contact-note a {
+      color: #d9bf70;
+      text-decoration: none;
+    }
+
+    .contact-note a:hover {
+      color: #f0d995;
+    }
+
+    @media (max-width: 640px) {
+      .contact-card {
+        padding: 22px 18px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
   <script type="application/ld+json">
   [
@@ -178,6 +325,69 @@
       <a href="https://www.reddit.com/u/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">R</span><span>Reddit</span></a>
       <a href="https://www.youtube.com/channel/UCxnQAWrGGaYikuy-N4YCTNQ" target="_blank" rel="noreferrer"><span class="social-icon">YT</span><span>YouTube</span></a>
     </div>
+
+    <section class="contact-card" aria-labelledby="contact-title">
+      <div class="contact-eyebrow">Contact Me</div>
+      <h2 id="contact-title">Start a private conversation.</h2>
+      <p>
+        Share your project, talent inquiry, or brand opportunity below and we’ll route it directly to
+        <a href="mailto:bdttalentgroup@yahoo.com">bdttalentgroup@yahoo.com</a>.
+      </p>
+
+      <form class="contact-form" id="contact-form">
+        <div class="contact-grid">
+          <label class="contact-field">
+            <span>Name</span>
+            <input class="contact-input" type="text" name="name" placeholder="Your name" required />
+          </label>
+          <label class="contact-field">
+            <span>Email</span>
+            <input class="contact-input" type="email" name="email" placeholder="name@example.com" required />
+          </label>
+        </div>
+
+        <label class="contact-field">
+          <span>Message</span>
+          <textarea class="contact-textarea" name="message" placeholder="Tell us about your inquiry." required></textarea>
+        </label>
+
+        <div class="contact-actions">
+          <button class="contact-submit" type="submit">Send Message</button>
+          <div class="contact-note">
+            This opens your email app with a pre-filled message to
+            <a href="mailto:bdttalentgroup@yahoo.com">bdttalentgroup@yahoo.com</a>.
+          </div>
+        </div>
+      </form>
+    </section>
   </div>
+
+  <script>
+    const contactForm = document.getElementById('contact-form');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const name = String(formData.get('name') || '').trim();
+        const email = String(formData.get('email') || '').trim();
+        const message = String(formData.get('message') || '').trim();
+        const subject = encodeURIComponent(name ? `${name} | BDT Talent Group Inquiry` : 'BDT Talent Group Inquiry');
+        const body = encodeURIComponent(
+          [
+            name ? `Name: ${name}` : '',
+            email ? `Email: ${email}` : '',
+            '',
+            message,
+          ]
+            .filter(Boolean)
+            .join('\n')
+        );
+
+        window.location.href = `mailto:bdttalentgroup@yahoo.com?subject=${subject}&body=${body}`;
+      });
+    }
+  </script>
 </body>
 </html>
