@@ -439,106 +439,782 @@
   </script>
 </head>
 <body>
-  <div class="hero">
-    <img src="bdt-logo.jpeg" alt="BDT Talent Group Logo" class="logo" />
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-    <h1>AI-Powered Talent. <span>Human-Centered Culture.</span></h1>
-    <p>Elevating the next generation of creators. The industry’s watching. 🚀</p>
+    body {
+      display: block;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(183, 28, 28, 0.16), transparent 26%),
+        radial-gradient(circle at top right, rgba(201, 168, 76, 0.12), transparent 22%),
+        #040404;
+      color: #fff;
+      overflow-x: hidden;
+    }
 
-    <div class="divider"></div>
-    <div class="coming-soon">Official Website Coming Soon</div>
-    <div class="social-links">
-      <a href="https://x.com/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">X</span><span>X</span></a>
-      <a href="https://www.tiktok.com/@bdttalentgroup" target="_blank" rel="noreferrer"><span class="social-icon">TT</span><span>TikTok</span></a>
-      <a href="https://www.instagram.com/bdttalentgroup/" target="_blank" rel="noreferrer"><span class="social-icon">IG</span><span>Instagram</span></a>
-      <a href="https://www.threads.com/@bdttalentgroup" target="_blank" rel="noreferrer"><span class="social-icon">@</span><span>Threads</span></a>
-      <a href="https://www.facebook.com/profile.php?id=61576643010008" target="_blank" rel="noreferrer"><span class="social-icon">f</span><span>Facebook</span></a>
-      <a href="https://www.linkedin.com/in/isaac-tran-8668033ba/" target="_blank" rel="noreferrer"><span class="social-icon">in</span><span>LinkedIn</span></a>
-      <a href="https://bsky.app/profile/bdttalentgroup.bsky.social" target="_blank" rel="noreferrer"><span class="social-icon">BS</span><span>Bluesky</span></a>
-      <a href="https://snapchat.com/add/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">SC</span><span>Snapchat</span></a>
-      <a href="https://www.reddit.com/u/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">R</span><span>Reddit</span></a>
-      <a href="https://www.youtube.com/channel/UCxnQAWrGGaYikuy-N4YCTNQ" target="_blank" rel="noreferrer"><span class="social-icon">YT</span><span>YouTube</span></a>
-    </div>
+    body.menu-open {
+      overflow: hidden;
+    }
 
-    <section class="showcase" aria-label="BDT highlights">
-      <article class="showcase-card is-active" data-panel tabindex="0" role="button" aria-pressed="true">
-        <div class="showcase-eyebrow">About Me</div>
-        <p>Coming Soon</p>
-      </article>
+    .site-layout {
+      position: relative;
+      min-height: 100vh;
+    }
 
-      <article class="showcase-card" data-panel tabindex="0" role="button" aria-pressed="false">
-        <div class="showcase-eyebrow">What We Do</div>
-        <p>Coming Soon</p>
-      </article>
+    .mobile-bar {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      background: rgba(7, 7, 7, 0.92);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+      backdrop-filter: blur(16px);
+    }
 
-      <article class="showcase-card" data-panel tabindex="0" role="button" aria-pressed="false">
-        <div class="showcase-eyebrow">Products</div>
-        <p>Coming Soon</p>
-      </article>
-    </section>
+    .mobile-brand {
+      font-size: 0.92rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #f3ddb0;
+    }
 
-    <section class="contact-card" aria-labelledby="contact-title">
-      <div class="contact-eyebrow">Contact Me</div>
-      <h2 id="contact-title">Start a private conversation.</h2>
-      <p>
-        Share your project, talent inquiry, or brand opportunity below and we’ll route it directly to BDT
-        management.
-      </p>
+    .mobile-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(201, 168, 76, 0.22);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      color: #f5e9bf;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+    }
 
-      <form class="contact-form" id="contact-form">
-        <div class="contact-grid">
-          <label class="contact-field">
-            <span>Name</span>
-            <input class="contact-input" type="text" name="name" placeholder="Your name" required />
-          </label>
-          <label class="contact-field">
-            <span>Email</span>
-            <input class="contact-input" type="email" name="email" placeholder="name@example.com" required />
-          </label>
+    .mobile-toggle:hover {
+      transform: translateY(-1px);
+      border-color: rgba(201, 168, 76, 0.55);
+      background: rgba(201, 168, 76, 0.08);
+    }
+
+    .sidebar-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.58);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 55;
+    }
+
+    .sidebar-backdrop.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: 292px;
+      padding: 28px 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      background:
+        radial-gradient(circle at top, rgba(183, 28, 28, 0.18), transparent 28%),
+        linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(5, 5, 5, 0.98));
+      border-right: 1px solid rgba(201, 168, 76, 0.18);
+      box-shadow: 24px 0 60px rgba(0, 0, 0, 0.32);
+      backdrop-filter: blur(18px);
+      z-index: 70;
+      transition: transform 0.34s ease, box-shadow 0.34s ease;
+    }
+
+    .sidebar-brand {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-kicker {
+      font-family: Arial, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #c9a84c;
+    }
+
+    .sidebar-title {
+      font-size: 1.35rem;
+      letter-spacing: 0.08em;
+      color: #fff;
+    }
+
+    .sidebar-copy {
+      font-family: Arial, sans-serif;
+      font-size: 0.86rem;
+      line-height: 1.8;
+      color: #a7a7a7;
+    }
+
+    .sidebar-nav {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 0 16px 0 30px;
+      border: 1px solid rgba(201, 168, 76, 0.14);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.03);
+      color: #d8d8d8;
+      font-family: Arial, sans-serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition:
+        transform 0.22s ease,
+        color 0.22s ease,
+        border-color 0.22s ease,
+        background 0.22s ease,
+        box-shadow 0.22s ease;
+    }
+
+    .sidebar-link::before {
+      content: '';
+      position: absolute;
+      left: 12px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #c9a84c;
+      opacity: 0.25;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+
+    .sidebar-link:hover {
+      transform: translateX(4px);
+      color: #f5e9bf;
+      border-color: rgba(201, 168, 76, 0.44);
+      background: rgba(201, 168, 76, 0.08);
+    }
+
+    .sidebar-link.is-current {
+      color: #f5e9bf;
+      transform: translateX(6px);
+      border-color: rgba(201, 168, 76, 0.68);
+      background:
+        radial-gradient(circle at left, rgba(201, 168, 76, 0.14), transparent 28%),
+        rgba(201, 168, 76, 0.08);
+      box-shadow: 0 14px 36px rgba(0, 0, 0, 0.24);
+    }
+
+    .sidebar-link.is-current::before {
+      opacity: 1;
+      transform: scale(1.25);
+    }
+
+    .sidebar-social {
+      margin-top: auto;
+      display: grid;
+      gap: 12px;
+    }
+
+    .sidebar-social-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #7e7e7e;
+    }
+
+    .sidebar-social-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .sidebar-social-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 0 14px;
+      border: 1px solid rgba(201, 168, 76, 0.16);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.03);
+      color: #d8d8d8;
+      font-family: Arial, sans-serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform 0.22s ease, border-color 0.22s ease, color 0.22s ease, background 0.22s ease;
+    }
+
+    .sidebar-social-links a:hover {
+      transform: translateY(-1px);
+      color: #f5e9bf;
+      border-color: rgba(201, 168, 76, 0.58);
+      background: rgba(201, 168, 76, 0.08);
+    }
+
+    .sidebar-social-links .social-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .site-main {
+      margin-left: 292px;
+      padding: 32px clamp(20px, 4vw, 44px) 72px;
+    }
+
+    .page-shell {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: grid;
+      gap: 26px;
+    }
+
+    .section-block {
+      position: relative;
+      scroll-margin-top: 88px;
+    }
+
+    .section-shell {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(201, 168, 76, 0.18);
+      border-radius: 30px;
+      padding: 30px 28px;
+      background:
+        radial-gradient(circle at top right, rgba(183, 28, 28, 0.14), transparent 28%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        transform 0.52s ease,
+        opacity 0.52s ease,
+        border-color 0.28s ease,
+        box-shadow 0.28s ease;
+    }
+
+    .section-shell::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+      opacity: 0.55;
+    }
+
+    .section-block.is-visible .section-shell {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-block.is-jumping .section-shell,
+    .section-block.is-jumping .contact-card {
+      animation: sectionLift 480ms ease-in-out;
+    }
+
+    .section-block.is-current-section .section-shell,
+    .section-block.is-current-section .contact-card {
+      border-color: rgba(201, 168, 76, 0.34);
+      box-shadow: 0 26px 78px rgba(0, 0, 0, 0.34);
+    }
+
+    @keyframes sectionLift {
+      0% {
+        opacity: 0.45;
+        transform: translateY(32px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero {
+      min-height: calc(100vh - 64px);
+      max-width: none;
+      width: 100%;
+      padding: 24px 0 10px;
+      display: grid;
+      gap: 22px;
+      align-content: center;
+      text-align: center;
+    }
+
+    .hero-stage {
+      padding: 24px 18px 0;
+    }
+
+    .logo {
+      max-width: 820px;
+      width: min(100%, 820px);
+      margin: 0 auto 40px;
+    }
+
+    .social-links {
+      margin-top: 28px;
+      justify-content: center;
+    }
+
+    .hero .social-links a {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .hero-summary {
+      display: grid;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .section-kicker {
+      font-family: Arial, sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #f1d78f;
+    }
+
+    .section-title {
+      font-size: clamp(1.7rem, 3vw, 2.8rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: #fff;
+    }
+
+    .section-copy {
+      font-family: Arial, sans-serif;
+      font-size: 0.96rem;
+      line-height: 1.9;
+      color: #bababa;
+      max-width: 760px;
+    }
+
+    .section-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 42px;
+      padding: 0 18px;
+      border: 1px solid rgba(201, 168, 76, 0.28);
+      border-radius: 999px;
+      background: rgba(201, 168, 76, 0.08);
+      font-family: Arial, sans-serif;
+      font-size: 0.76rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #f5e9bf;
+    }
+
+    .showcase {
+      margin-top: 10px;
+    }
+
+    .showcase-card {
+      min-height: 220px;
+    }
+
+    .showcase-card[data-jump] {
+      cursor: pointer;
+    }
+
+    .showcase-card p {
+      color: #d6b05a;
+    }
+
+    .content-section {
+      display: grid;
+      gap: 18px;
+    }
+
+    .contact-section .contact-card {
+      position: relative;
+      overflow: hidden;
+      margin: 0;
+      max-width: none;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: transform 0.52s ease, opacity 0.52s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .contact-section.is-visible .contact-card {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .contact-section .contact-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+      opacity: 0.45;
+    }
+
+    @media (max-width: 1180px) {
+      .sidebar {
+        width: 268px;
+      }
+
+      .site-main {
+        margin-left: 268px;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .mobile-bar {
+        display: flex;
+      }
+
+      .sidebar {
+        transform: translateX(-110%);
+        width: min(84vw, 340px);
+      }
+
+      .sidebar.is-open {
+        transform: translateX(0);
+      }
+
+      .site-main {
+        margin-left: 0;
+        padding: 22px 18px 52px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 0;
+      }
+
+      .showcase {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .section-shell,
+      .contact-card {
+        padding: 24px 18px;
+      }
+
+      .showcase {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-card,
+      .showcase.has-active .showcase-card.is-active {
+        transform: translateY(0);
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+    }
+  </style>
+
+  <div class="mobile-bar">
+    <div class="mobile-brand">BDT Talent Group</div>
+    <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="site-sidebar" data-mobile-toggle>☰</button>
+  </div>
+
+  <div class="sidebar-backdrop" data-sidebar-close></div>
+
+  <div class="site-layout">
+    <aside class="sidebar" id="site-sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-kicker">Main Navigation</div>
+        <div class="sidebar-title">BDT Talent Group</div>
+        <p class="sidebar-copy">
+          A luxury-forward Las Vegas presentation for talent, partnerships, products, and private inquiries.
+        </p>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Primary">
+        <a class="sidebar-link is-current" href="#about-me" data-nav-link>About Me</a>
+        <a class="sidebar-link" href="#what-we-do" data-nav-link>What We Do</a>
+        <a class="sidebar-link" href="#products" data-nav-link>Products</a>
+        <a class="sidebar-link" href="#contact-me" data-nav-link>Contact Me</a>
+      </nav>
+
+      <div class="sidebar-social">
+        <div class="sidebar-social-label">Connect</div>
+        <div class="sidebar-social-links">
+          <a href="https://x.com/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">X</span><span>X</span></a>
+          <a href="https://www.tiktok.com/@bdttalentgroup" target="_blank" rel="noreferrer"><span class="social-icon">TT</span><span>TikTok</span></a>
+          <a href="https://www.instagram.com/bdttalentgroup/" target="_blank" rel="noreferrer"><span class="social-icon">IG</span><span>Instagram</span></a>
+          <a href="https://www.threads.com/@bdttalentgroup" target="_blank" rel="noreferrer"><span class="social-icon">@</span><span>Threads</span></a>
+          <a href="https://www.facebook.com/profile.php?id=61576643010008" target="_blank" rel="noreferrer"><span class="social-icon">f</span><span>Facebook</span></a>
+          <a href="https://www.linkedin.com/in/isaac-tran-8668033ba/" target="_blank" rel="noreferrer"><span class="social-icon">in</span><span>LinkedIn</span></a>
+          <a href="https://bsky.app/profile/bdttalentgroup.bsky.social" target="_blank" rel="noreferrer"><span class="social-icon">BS</span><span>Bluesky</span></a>
+          <a href="https://snapchat.com/add/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">SC</span><span>Snapchat</span></a>
+          <a href="https://www.reddit.com/u/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">R</span><span>Reddit</span></a>
+          <a href="https://www.youtube.com/channel/UCxnQAWrGGaYikuy-N4YCTNQ" target="_blank" rel="noreferrer"><span class="social-icon">YT</span><span>YouTube</span></a>
         </div>
+      </div>
+    </aside>
 
-        <label class="contact-field">
-          <span>Message</span>
-          <textarea class="contact-textarea" name="message" placeholder="Tell us about your inquiry." required></textarea>
-        </label>
+    <main class="site-main">
+      <div class="page-shell">
+        <section id="about-me" class="section-block hero is-visible is-current-section" data-section>
+          <div class="hero-stage">
+            <img src="bdt-logo.jpeg" alt="BDT Talent Group Logo" class="logo" />
 
-        <div class="contact-actions">
-          <button class="contact-submit" type="submit">Send Message</button>
-        </div>
-      </form>
-    </section>
+            <h1>AI-Powered Talent. <span>Human-Centered Culture.</span></h1>
+            <p>Elevating the next generation of creators. The industry’s watching. 🚀</p>
+
+            <div class="divider"></div>
+            <div class="coming-soon">Official Website Coming Soon</div>
+            <div class="social-links">
+              <a href="https://x.com/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">X</span><span>X</span></a>
+              <a href="https://www.tiktok.com/@bdttalentgroup" target="_blank" rel="noreferrer"><span class="social-icon">TT</span><span>TikTok</span></a>
+              <a href="https://www.instagram.com/bdttalentgroup/" target="_blank" rel="noreferrer"><span class="social-icon">IG</span><span>Instagram</span></a>
+              <a href="https://www.threads.com/@bdttalentgroup" target="_blank" rel="noreferrer"><span class="social-icon">@</span><span>Threads</span></a>
+              <a href="https://www.facebook.com/profile.php?id=61576643010008" target="_blank" rel="noreferrer"><span class="social-icon">f</span><span>Facebook</span></a>
+              <a href="https://www.linkedin.com/in/isaac-tran-8668033ba/" target="_blank" rel="noreferrer"><span class="social-icon">in</span><span>LinkedIn</span></a>
+              <a href="https://bsky.app/profile/bdttalentgroup.bsky.social" target="_blank" rel="noreferrer"><span class="social-icon">BS</span><span>Bluesky</span></a>
+              <a href="https://snapchat.com/add/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">SC</span><span>Snapchat</span></a>
+              <a href="https://www.reddit.com/u/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">R</span><span>Reddit</span></a>
+              <a href="https://www.youtube.com/channel/UCxnQAWrGGaYikuy-N4YCTNQ" target="_blank" rel="noreferrer"><span class="social-icon">YT</span><span>YouTube</span></a>
+            </div>
+          </div>
+
+          <div class="section-shell hero-summary">
+            <div class="section-kicker">About Me</div>
+            <div class="section-title">About Me</div>
+            <p class="section-copy">Coming Soon</p>
+          </div>
+
+          <section class="showcase" aria-label="BDT highlights">
+            <article class="showcase-card is-active" data-panel data-jump="#about-me" tabindex="0" role="button" aria-pressed="true">
+              <div class="showcase-eyebrow">About Me</div>
+              <p>Coming Soon</p>
+            </article>
+
+            <article class="showcase-card" data-panel data-jump="#what-we-do" tabindex="0" role="button" aria-pressed="false">
+              <div class="showcase-eyebrow">What We Do</div>
+              <p>Coming Soon</p>
+            </article>
+
+            <article class="showcase-card" data-panel data-jump="#products" tabindex="0" role="button" aria-pressed="false">
+              <div class="showcase-eyebrow">Products</div>
+              <p>Coming Soon</p>
+            </article>
+          </section>
+        </section>
+
+        <section id="what-we-do" class="section-block content-section" data-section>
+          <div class="section-shell">
+            <div class="section-kicker">What We Do</div>
+            <div class="section-title">What We Do</div>
+            <p class="section-copy">Coming Soon</p>
+          </div>
+        </section>
+
+        <section id="products" class="section-block content-section" data-section>
+          <div class="section-shell">
+            <div class="section-kicker">Products</div>
+            <div class="section-title">Products</div>
+            <p class="section-copy">Coming Soon</p>
+          </div>
+        </section>
+
+        <section id="contact-me" class="section-block contact-section" data-section>
+          <section class="contact-card" aria-labelledby="contact-title">
+            <div class="contact-eyebrow">Contact Me</div>
+            <h2 id="contact-title">Start a private conversation.</h2>
+            <p>
+              Share your project, talent inquiry, or brand opportunity below and we’ll route it directly to BDT
+              management.
+            </p>
+
+            <form class="contact-form" id="contact-form">
+              <div class="contact-grid">
+                <label class="contact-field">
+                  <span>Name</span>
+                  <input class="contact-input" type="text" name="name" placeholder="Your name" required />
+                </label>
+                <label class="contact-field">
+                  <span>Email</span>
+                  <input class="contact-input" type="email" name="email" placeholder="name@example.com" required />
+                </label>
+              </div>
+
+              <label class="contact-field">
+                <span>Message</span>
+                <textarea class="contact-textarea" name="message" placeholder="Tell us about your inquiry." required></textarea>
+              </label>
+
+              <div class="contact-actions">
+                <button class="contact-submit" type="submit">Send Message</button>
+              </div>
+            </form>
+          </section>
+        </section>
+      </div>
+    </main>
   </div>
 
   <script>
+    const body = document.body;
+    const sidebar = document.getElementById('site-sidebar');
+    const sidebarBackdrop = document.querySelector('[data-sidebar-close]');
+    const mobileToggle = document.querySelector('[data-mobile-toggle]');
     const showcase = document.querySelector('.showcase');
     const showcasePanels = Array.from(document.querySelectorAll('[data-panel]'));
+    const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
+    const sections = Array.from(document.querySelectorAll('[data-section]'));
     const contactForm = document.getElementById('contact-form');
 
+    const openSidebar = () => {
+      if (!sidebar || !mobileToggle) return;
+      sidebar.classList.add('is-open');
+      sidebarBackdrop.classList.add('is-visible');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      body.classList.add('menu-open');
+    };
+
+    const closeSidebar = () => {
+      if (!sidebar || !mobileToggle) return;
+      sidebar.classList.remove('is-open');
+      sidebarBackdrop.classList.remove('is-visible');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      body.classList.remove('menu-open');
+    };
+
+    const setActivePanel = (panel) => {
+      if (!showcase || !panel) return;
+
+      showcase.classList.add('has-active');
+      showcasePanels.forEach((item) => {
+        const isActive = item === panel;
+        item.classList.toggle('is-active', isActive);
+        item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+    };
+
+    const setCurrentSection = (id) => {
+      navLinks.forEach((link) => {
+        const isCurrent = link.getAttribute('href') === `#${id}`;
+        link.classList.toggle('is-current', isCurrent);
+      });
+
+      sections.forEach((section) => {
+        section.classList.toggle('is-current-section', section.id === id);
+      });
+    };
+
+    const jumpToSection = (selector) => {
+      const target = document.querySelector(selector);
+      if (!target) return;
+
+      target.classList.remove('is-jumping');
+      void target.offsetWidth;
+      target.classList.add('is-jumping');
+      window.setTimeout(() => target.classList.remove('is-jumping'), 520);
+
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setCurrentSection(target.id);
+      closeSidebar();
+    };
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        if (sidebar.classList.contains('is-open')) {
+          closeSidebar();
+        } else {
+          openSidebar();
+        }
+      });
+    }
+
+    if (sidebarBackdrop) {
+      sidebarBackdrop.addEventListener('click', closeSidebar);
+    }
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        jumpToSection(link.getAttribute('href'));
+      });
+    });
+
     if (showcase && showcasePanels.length) {
-      const setActivePanel = (panel) => {
-        showcase.classList.add('has-active');
-
-        showcasePanels.forEach((item) => {
-          const isActive = item === panel;
-          item.classList.toggle('is-active', isActive);
-          item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-        });
-      };
-
       showcasePanels.forEach((panel) => {
-        panel.addEventListener('click', () => {
+        const activateAndJump = () => {
           setActivePanel(panel);
-        });
 
+          if (panel.dataset.jump) {
+            jumpToSection(panel.dataset.jump);
+          }
+        };
+
+        panel.addEventListener('click', activateAndJump);
         panel.addEventListener('keydown', (event) => {
           if (event.key === 'Enter' || event.key === ' ') {
             event.preventDefault();
-            setActivePanel(panel);
+            activateAndJump();
           }
         });
       });
 
       setActivePanel(showcasePanels.find((panel) => panel.classList.contains('is-active')) || showcasePanels[0]);
+    }
+
+    if (sections.length) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+            }
+          });
+
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+
+          if (visible) {
+            setCurrentSection(visible.target.id);
+          }
+        },
+        {
+          threshold: [0.2, 0.45, 0.7],
+          rootMargin: '-8% 0px -50% 0px',
+        }
+      );
+
+      sections.forEach((section) => observer.observe(section));
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 980) {
+        closeSidebar();
+      }
+    });
+
+    if (window.location.hash) {
+      window.setTimeout(() => {
+        jumpToSection(window.location.hash);
+      }, 120);
+    } else {
+      setCurrentSection('about-me');
     }
 
     if (contactForm) {
