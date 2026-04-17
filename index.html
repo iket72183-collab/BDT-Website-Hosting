@@ -402,7 +402,7 @@
         "@type": "ImageObject",
         "url": "https://www.bdttalentgroup.com/bdt-logo.jpeg"
       },
-      "description": "BDT Talent Group is a luxury talent agency pairing AI-powered discovery with hands-on representation for fashion, editorial, and brand partnerships.",
+      "description": "BDT Talent Group" is a luxury talent agency pairing AI-powered discovery with hands-on representation for fashion, editorial, and brand partnerships.",
       "founder": {
         "@type": "Person",
         "name": "Isaac Tran",
@@ -775,22 +775,6 @@
       color: #f5e9bf;
     }
 
-    .showcase {
-      margin-top: 10px;
-    }
-
-    .showcase-card {
-      min-height: 220px;
-    }
-
-    .showcase-card[data-jump] {
-      cursor: pointer;
-    }
-
-    .showcase-card p {
-      color: #d6b05a;
-    }
-
     .content-section {
       display: grid;
       gap: 18px;
@@ -854,24 +838,12 @@
         padding-top: 0;
       }
 
-      .showcase {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
     }
 
     @media (max-width: 640px) {
       .section-shell,
       .contact-card {
         padding: 24px 18px;
-      }
-
-      .showcase {
-        grid-template-columns: 1fr;
-      }
-
-      .showcase-card,
-      .showcase.has-active .showcase-card.is-active {
-        transform: translateY(0);
       }
 
       .social-links {
@@ -892,9 +864,6 @@
       <div class="sidebar-brand">
         <div class="sidebar-kicker">Main Navigation</div>
         <div class="sidebar-title">BDT Talent Group</div>
-        <p class="sidebar-copy">
-          BDT Talent Group
-        </p>
       </div>
 
       <nav class="sidebar-nav" aria-label="Primary">
@@ -924,7 +893,7 @@
               <a href="https://www.threads.com/@bdttalentgroup" target="_blank" rel="noreferrer"><span class="social-icon">@</span><span>Threads</span></a>
               <a href="https://www.facebook.com/profile.php?id=61576643010008" target="_blank" rel="noreferrer"><span class="social-icon">f</span><span>Facebook</span></a>
               <a href="https://www.linkedin.com/in/isaac-tran-8668033ba/" target="_blank" rel="noreferrer"><span class="social-icon">in</span><span>LinkedIn</span></a>
-              <a href="https://bsky.app/profile/bdttalentgroup.bsky.social" target="_blank" rel="noreferrer"><span class="social-icon">BS</span><span>Bluesky</span></a>
+              <a href="https://bsky.app/profile/bdttalentgroup.bsky.social" target="_blank" rel="noreferrer"><span> class="social-icon">BS</span><span>Bluesky</span></a>
               <a href="https://snapchat.com/add/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">SC</span><span>Snapchat</span></a>
               <a href="https://www.reddit.com/u/BDTTalentGroup" target="_blank" rel="noreferrer"><span class="social-icon">R</span><span>Reddit</span></a>
               <a href="https://www.youtube.com/channel/UCxnQAWrGGaYikuy-N4YCTNQ" target="_blank" rel="noreferrer"><span class="social-icon">YT</span><span>YouTube</span></a>
@@ -932,40 +901,20 @@
           </div>
 
           <div class="section-shell hero-summary">
-            <div class="section-kicker">About Me</div>
             <div class="section-title">About Me</div>
-            <p class="section-copy">Coming Soon</p>
+            <p class="section-copy>Coming Soon</p>
           </div>
-
-          <section class="showcase" aria-label="BDT highlights">
-            <article class="showcase-card is-active" data-panel data-jump="#about-me" tabindex="0" role="button" aria-pressed="true">
-              <div class="showcase-eyebrow">About Me</div>
-              <p>Coming Soon</p>
-            </article>
-
-            <article class="showcase-card" data-panel data-jump="#what-we-do" tabindex="0" role="button" aria-pressed="false">
-              <div class="showcase-eyebrow">What We Do</div>
-              <p>Coming Soon</p>
-            </article>
-
-            <article class="showcase-card" data-panel data-jump="#products" tabindex="0" role="button" aria-pressed="false">
-              <div class="showcase-eyebrow">Products</div>
-              <p>Coming Soon</p>
-            </article>
-          </section>
         </section>
 
         <section id="what-we-do" class="section-block content-section" data-section>
           <div class="section-shell">
-            <div class="section-kicker">What We Do</div>
             <div class="section-title">What We Do</div>
-            <p class="section-copy">Coming Soon</p>
+            <p class="section-copy>Coming Soon</p>
           </div>
         </section>
 
         <section id="products" class="section-block content-section" data-section>
           <div class="section-shell">
-            <div class="section-kicker">Products</div>
             <div class="section-title">Products</div>
             <p class="section-copy">Coming Soon</p>
           </div>
@@ -1012,8 +961,6 @@
     const sidebar = document.getElementById('site-sidebar');
     const sidebarBackdrop = document.querySelector('[data-sidebar-close]');
     const mobileToggle = document.querySelector('[data-mobile-toggle]');
-    const showcase = document.querySelector('.showcase');
-    const showcasePanels = Array.from(document.querySelectorAll('[data-panel]'));
     const navLinks = Array.from(document.querySelectorAll('[data-nav-link]'));
     const sections = Array.from(document.querySelectorAll('[data-section]'));
     const contactForm = document.getElementById('contact-form');
@@ -1032,17 +979,6 @@
       sidebarBackdrop.classList.remove('is-visible');
       mobileToggle.setAttribute('aria-expanded', 'false');
       body.classList.remove('menu-open');
-    };
-
-    const setActivePanel = (panel) => {
-      if (!showcase || !panel) return;
-
-      showcase.classList.add('has-active');
-      showcasePanels.forEach((item) => {
-        const isActive = item === panel;
-        item.classList.toggle('is-active', isActive);
-        item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-      });
     };
 
     const setCurrentSection = (id) => {
@@ -1090,28 +1026,6 @@
         jumpToSection(link.getAttribute('href'));
       });
     });
-
-    if (showcase && showcasePanels.length) {
-      showcasePanels.forEach((panel) => {
-        const activateAndJump = () => {
-          setActivePanel(panel);
-
-          if (panel.dataset.jump) {
-            jumpToSection(panel.dataset.jump);
-          }
-        };
-
-        panel.addEventListener('click', activateAndJump);
-        panel.addEventListener('keydown', (event) => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            activateAndJump();
-          }
-        });
-      });
-
-      setActivePanel(showcasePanels.find((panel) => panel.classList.contains('is-active')) || showcasePanels[0]);
-    }
 
     if (sections.length) {
       const observer = new IntersectionObserver(
