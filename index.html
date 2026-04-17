@@ -22,7 +22,7 @@
       text-align: center;
       padding: 60px 24px 40px;
       width: 100%;
-      max-width: 900px;
+      max-width: 1120px;
     }
 
     .logo {
@@ -121,12 +121,19 @@
     .showcase {
       margin-top: 42px;
       display: grid;
-      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      align-items: stretch;
+      perspective: 1200px;
     }
 
     .showcase-card {
       position: relative;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 240px;
       border: 1px solid rgba(201, 168, 76, 0.22);
       border-radius: 26px;
       padding: 24px 22px;
@@ -136,6 +143,14 @@
         linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
       text-align: left;
       box-shadow: 0 22px 60px rgba(0, 0, 0, 0.26);
+      cursor: pointer;
+      transition:
+        transform 420ms ease-in-out,
+        box-shadow 420ms ease-in-out,
+        border-color 420ms ease-in-out,
+        opacity 420ms ease-in-out,
+        filter 420ms ease-in-out,
+        background 420ms ease-in-out;
     }
 
     .showcase-card::after {
@@ -145,6 +160,51 @@
       pointer-events: none;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
       opacity: 0.45;
+      transition: opacity 420ms ease-in-out;
+    }
+
+    .showcase-card::before {
+      content: '';
+      position: absolute;
+      inset: auto 22px 18px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(201, 168, 76, 0), rgba(201, 168, 76, 0.75), rgba(201, 168, 76, 0));
+      opacity: 0.4;
+      transition: opacity 420ms ease-in-out;
+    }
+
+    .showcase-card:hover {
+      border-color: rgba(201, 168, 76, 0.42);
+      transform: translateY(-6px);
+    }
+
+    .showcase-card:focus-visible {
+      outline: none;
+      border-color: rgba(201, 168, 76, 0.82);
+      box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.14), 0 22px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .showcase.has-active .showcase-card {
+      opacity: 0.56;
+      filter: saturate(0.72);
+      transform: translateY(0);
+    }
+
+    .showcase.has-active .showcase-card.is-active {
+      opacity: 1;
+      filter: none;
+      transform: translateY(-18px);
+      border-color: rgba(201, 168, 76, 0.82);
+      background:
+        radial-gradient(circle at top right, rgba(183, 28, 28, 0.26), transparent 38%),
+        radial-gradient(circle at bottom left, rgba(201, 168, 76, 0.18), transparent 42%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      box-shadow: 0 34px 80px rgba(0, 0, 0, 0.38);
+    }
+
+    .showcase.has-active .showcase-card.is-active::after,
+    .showcase.has-active .showcase-card.is-active::before {
+      opacity: 0.85;
     }
 
     .showcase-eyebrow {
@@ -310,7 +370,26 @@
       color: #f0d995;
     }
 
+    @media (max-width: 900px) {
+      .showcase {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 640px) {
+      .hero {
+        padding-top: 48px;
+      }
+
+      .showcase {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-card,
+      .showcase.has-active .showcase-card.is-active {
+        transform: translateY(0);
+      }
+
       .contact-card {
         padding: 22px 18px;
       }
@@ -390,19 +469,19 @@
     </div>
 
     <section class="showcase" aria-label="BDT highlights">
-      <article class="showcase-card">
+      <article class="showcase-card is-active" data-panel tabindex="0" role="button" aria-pressed="true">
         <div class="showcase-eyebrow">About Me</div>
         <h3>About Me</h3>
         <p>Coming Soon</p>
       </article>
 
-      <article class="showcase-card">
+      <article class="showcase-card" data-panel tabindex="0" role="button" aria-pressed="false">
         <div class="showcase-eyebrow">What We Do</div>
         <h3>What We Do</h3>
         <p>Coming Soon</p>
       </article>
 
-      <article class="showcase-card">
+      <article class="showcase-card" data-panel tabindex="0" role="button" aria-pressed="false">
         <div class="showcase-eyebrow">Products</div>
         <h3>Products</h3>
         <p>Coming Soon</p>
@@ -442,7 +521,36 @@
   </div>
 
   <script>
+    const showcase = document.querySelector('.showcase');
+    const showcasePanels = Array.from(document.querySelectorAll('[data-panel]'));
     const contactForm = document.getElementById('contact-form');
+
+    if (showcase && showcasePanels.length) {
+      const setActivePanel = (panel) => {
+        showcase.classList.add('has-active');
+
+        showcasePanels.forEach((item) => {
+          const isActive = item === panel;
+          item.classList.toggle('is-active', isActive);
+          item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+      };
+
+      showcasePanels.forEach((panel) => {
+        panel.addEventListener('click', () => {
+          setActivePanel(panel);
+        });
+
+        panel.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            setActivePanel(panel);
+          }
+        });
+      });
+
+      setActivePanel(showcasePanels.find((panel) => panel.classList.contains('is-active')) || showcasePanels[0]);
+    }
 
     if (contactForm) {
       contactForm.addEventListener('submit', (event) => {
