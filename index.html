@@ -723,8 +723,40 @@
 
     .hero-summary {
       display: grid;
-      gap: 14px;
+      gap: 18px;
       text-align: left;
+    }
+
+    .about-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 250px) minmax(0, 1fr);
+      gap: 24px;
+      align-items: center;
+    }
+
+    .about-portrait-wrap {
+      width: min(100%, 250px);
+      justify-self: center;
+    }
+
+    .about-portrait {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 1px solid rgba(201, 168, 76, 0.24);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .about-copy {
+      display: grid;
+      gap: 14px;
+    }
+
+    .about-copy .section-copy {
+      max-width: none;
     }
 
     .section-kicker {
@@ -857,9 +889,35 @@
         padding-top: 0;
       }
 
+      .hero-summary {
+        gap: 16px;
+      }
+
+      .about-panel {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .about-portrait-wrap {
+        width: min(100%, 180px);
+      }
+
+      .about-copy {
+        text-align: center;
+      }
+
+      .about-copy .section-copy {
+        max-width: 34ch;
+        margin: 0 auto;
+      }
+
     }
 
     @media (max-width: 640px) {
+      .hero-stage {
+        padding: 12px 0 0;
+      }
+
       .product-spotlight {
         padding: 18px;
       }
@@ -871,6 +929,17 @@
 
       .social-links {
         justify-content: center;
+        gap: 10px;
+      }
+
+      .social-links a {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .section-copy {
+        font-size: 0.92rem;
+        line-height: 1.75;
       }
     }
   </style>
@@ -924,7 +993,20 @@
 
           <div class="section-shell hero-summary">
             <div class="section-title">About Me</div>
-            <p class="section-copy">Coming Soon</p>
+            <div class="about-panel">
+              <div class="about-portrait-wrap">
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABwUFRkVEhwZFxkgHhwiK0cuKycnK1c+QjRHZ1tta2VbZGJygKSLcnmbe2JkjsKQm6mut7m3bonJ18ey1qS0t7D/2wBDAR4gICslK1QuLlSwdWR1sLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLD/wgARCACHAHcDASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAAAAECAwT/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAAByCgUEgqUAgIC0FACZ1iWkNiyAgNKBSLkZx0lktKLICA3QLkeWYHbhT168nqLASwA6VTPj6+cAlDfTjo9IEogOtmTyYsBCyw1vn0O9AQA68e3kOcBENIHTmPVvx+soIDr4fd4CAksKgdeXqNWWKKgOnhCQIAC+kN0hCgP/8QAHxAAAQQDAAMBAAAAAAAAAAAAAQIRIDAAITEDEDJQ/9oACAEBAAEFAvxxa3oXislglT28xSn9BVZLAl4bwbEzrFFzBPU6M/IZDqtUEuYjq+SX8zVyXk5M8SXEVlzM4ksbQBgkaG1gtBl//8QAFBEBAAAAAAAAAAAAAAAAAAAAYP/aAAgBAwEBPwER/8QAFBEBAAAAAAAAAAAAAAAAAAAAYP/aAAgBAgEBPwER/8QAHBAAAQQDAQAAAAAAAAAAAAAAQAERITASIGBx/9oACAEBAAY/AuhkDwDGht0GUdDpvYX/xAAiEAEAAQQCAgIDAAAAAAAAAAABEQAgMDEQIUFRYXGBkbH/2gAIAQEAAT8hvkqZy7zOuJfXCZ7MbwiaSSgGsbx5pHI7CtJ3w0YlBLU3448f7V1184imad92GkUUDgQJdUs1q0acq/GDuLkITU0/J5wTLdEE6r+s0aLlGC1+lvnH1NjbvtrvpTAq7CtlrtwRBpCi3ZvO2mXqoIKEFjpujg6qYu//2gAMAwEAAgADAAAAEFBIDdaKPJICFrqKPMGNPlqKPJFOvmGFPIPiojgEPKFhlooBPPmjjKrAPLosqqUwPPvovvY3PP/EABoRAAICAwAAAAAAAAAAAAAAAAEQABEwQFD/2gAIAQMBAT8QdStA8k4C/wD/xAAbEQACAgMBAAAAAAAAAAAAAAAAARARIDFAUP/aAAgBAgEBPxCb6NlV4DFmxT//xAAjEAEAAgEEAwEBAAMAAAAAAAABABEhIDFBURAwYXGRgaGx/9oACAEBAAE/ENaXMBsfbbu24JUqDZ69ybEbOn7FQurepigL6faRZu+7mIiJSvWLKjF2/wAnaajv89ZM+NvrOq/9zDBmGi9VeKlRwtBKwChtBpuWUn5ChK3aj0VKn8UHcvCxwcEcwg8RKyay/J91I6qit6EVLbg688+DqG+2eYu3d9QhMZ4y+HRU2wjUNpf1LvOqwLdifa3GnmJI3ylgjm6Ho6n+kaSWTsqPl8MHmNQNgnz5KoD5qYp+noNM2FH/ADKlXDDpIzHJQRsl3GOWcebQODBFIZ7OyCAmznQS+bt8PniXFola1tx1BTAfybWtr0EeY2uWT6xZcuXBWfYxW/DGqAxEEW3dfuhU3RHMQeIgRzK8KmS+YZrvq//Z" alt="Portrait of Isaac Tran, founder of BDT Talent Group" class="about-portrait" />
+              </div>
+              <div class="about-copy">
+                <div class="section-kicker">Founder, BDT Talent Group</div>
+                <p class="section-copy">
+                  Isaac Tran is the founder of BDT Talent Group and a passionate AI enthusiast who believes the
+                  future of human creativity isn't threatened by artificial intelligence - it's elevated by it. His
+                  vision is simple: empower artists, creators, and culture-makers with AI as a tool, not a
+                  replacement.
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
