@@ -382,10 +382,34 @@
         grid-template-columns: 1fr;
       }
     }
-  .riverdale-section { padding: 60px 40px; text-align: center; }
-.riverdale-panel { display: flex; flex-direction: column; align-items: center; gap: 24px; max-width: 900px; margin: 0 auto; }
-.riverdale-img { width: 100%; max-width: 800px; height: auto; border-radius: 16px; }
-.riverdale-copy { font-size: 1.1rem; line-height: 1.7; max-width: 700px; }
+  /* Riverdale Crew image panel */
+    .crew-image-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .crew-photo {
+      width: 100%;
+      max-width: 860px;
+      height: auto;
+      border-radius: 20px;
+      display: block;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.45);
+    }
+    .crew-caption {
+      text-align: center;
+      max-width: 680px;
+    }
+    .crew-caption .section-copy {
+      font-family: 'Georgia', serif;
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+      margin-top: 12px;
+    }
     </style>
   <script type="application/ld+json">
   [
@@ -1092,31 +1116,21 @@
           </div>
         </section>
 
-        <section class="riverdale-section">
-          <div class="section-title">Meet the Riverdale Crew</div>
-          <div class="riverdale-panel">
-            <img src="Riverdale_Crew.jpg" alt="The Riverdale Crew — Archie, Betty, and Veronica" class="riverdale-img" />
-            <p class="riverdale-copy">
-              Meet the <strong>Riverdale Crew</strong> — <strong>Archie, Betty, and Veronica</strong> — three AI agents working around the clock to support the team, streamline operations, and keep the creative engine running.
-            </p>
-          </div>
-        </section>
-
         <section id="riverdale-crew" class="section-block content-section" data-section>
           <div class="section-shell">
             <div class="section-title">Riverdale Crew</div>
-            <div class="crew-panel">
-              <div class="crew-visual" aria-label="Riverdale Crew feature art pending upload">
-                <div>
-                  <div class="crew-visual-label">Archie • Betty • Veronica</div>
-                  <div class="crew-visual-note">Riverdale Crew</div>
-                </div>
-              </div>
-              <div class="crew-copy">
+            <div class="crew-image-wrap">
+              <img
+                src="Riverdale_Crew.jpg"
+                alt="The Riverdale Crew — Archie, Betty, and Veronica"
+                class="crew-photo"
+              />
+              <div class="crew-caption">
                 <div class="section-kicker">AI Team Support</div>
                 <p class="section-copy">
-                  Riverdale Crew is Archie, Betty, and Veronica, three AI agents working around the clock to support
-                  the team, streamline operations, and keep the creative engine running.
+                  Meet <strong>Archie</strong>, <strong>Betty</strong>, and <strong>Veronica</strong> — the Riverdale Crew.
+                  Three AI agents working around the clock to support the team, streamline operations,
+                  and keep the creative engine running.
                 </p>
                 <div class="crew-badges" aria-label="Riverdale Crew members">
                   <span class="crew-badge">Archie</span>
