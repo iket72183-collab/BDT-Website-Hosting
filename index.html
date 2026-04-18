@@ -1210,6 +1210,18 @@
       target.classList.add('is-jumping');
       window.setTimeout(() => target.classList.remove('is-jumping'), 520);
 
+      // If jumping to about-me, scroll past the hero-stage to the section-shell
+      if (selector === '#about-me') {
+        const aboutShell = target.querySelector('.section-shell');
+        if (aboutShell) {
+          const y = aboutShell.getBoundingClientRect().top + window.scrollY - 32;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+          setCurrentSection('about-me');
+          closeSidebar();
+          return;
+        }
+      }
+
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setCurrentSection(target.id);
       closeSidebar();
