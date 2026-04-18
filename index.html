@@ -889,13 +889,35 @@
         padding-top: 0;
       }
 
+      .hero-summary {
+        gap: 16px;
+      }
+
       .about-panel {
         grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .about-portrait-wrap {
+        width: min(100%, 180px);
+      }
+
+      .about-copy {
+        text-align: center;
+      }
+
+      .about-copy .section-copy {
+        max-width: 34ch;
+        margin: 0 auto;
       }
 
     }
 
     @media (max-width: 640px) {
+      .hero-stage {
+        padding: 12px 0 0;
+      }
+
       .product-spotlight {
         padding: 18px;
       }
@@ -907,6 +929,17 @@
 
       .social-links {
         justify-content: center;
+        gap: 10px;
+      }
+
+      .social-links a {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .section-copy {
+        font-size: 0.92rem;
+        line-height: 1.75;
       }
     }
   </style>
