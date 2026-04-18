@@ -780,6 +780,77 @@
       gap: 18px;
     }
 
+    .product-spotlight {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 22px;
+      align-items: center;
+      margin-top: 20px;
+      padding: 22px;
+      border: 1px solid rgba(201, 168, 76, 0.16);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at top right, rgba(183, 28, 28, 0.14), transparent 30%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+    }
+
+    .product-preview {
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid rgba(201, 168, 76, 0.16);
+      background: rgba(0, 0, 0, 0.35);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+    }
+
+    .product-preview img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .product-copy {
+      display: grid;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .product-copy h3 {
+      font-size: clamp(1.35rem, 2.8vw, 2.2rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: #fff;
+    }
+
+    .product-copy p {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.9;
+      color: #bababa;
+    }
+
+    .product-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .product-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: 0 16px;
+      border: 1px solid rgba(201, 168, 76, 0.24);
+      border-radius: 999px;
+      background: rgba(201, 168, 76, 0.08);
+      font-family: Arial, sans-serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #f5e9bf;
+    }
+
     .contact-section .contact-card {
       position: relative;
       overflow: hidden;
@@ -841,6 +912,11 @@
     }
 
     @media (max-width: 640px) {
+      .product-spotlight {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
       .section-shell,
       .contact-card {
         padding: 24px 18px;
@@ -854,7 +930,7 @@
 
   <div class="mobile-bar">
     <div class="mobile-brand">BDT Talent Group</div>
-    <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="site-sidebar" data-mobile-toggle>Menu</button>
+    <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="site-sidebar" data-mobile-toggle>☰</button>
   </div>
 
   <div class="sidebar-backdrop" data-sidebar-close></div>
@@ -916,7 +992,30 @@
         <section id="products" class="section-block content-section" data-section>
           <div class="section-shell">
             <div class="section-title">Products</div>
-            <p class="section-copy">Coming Soon</p>
+            <p class="section-copy">
+              BDT Talent Group is preparing creator-focused mobile tools for the Google Play Store, starting with
+              Aight Bet and Add Me.
+            </p>
+
+            <div class="product-spotlight">
+              <div class="product-preview">
+                <img src="apps-announcement.jpg" alt="BDT Talent Group apps announcement featuring Aight Bet and Add Me" />
+              </div>
+
+              <div class="product-copy">
+                <div class="section-kicker">Mobile Tools for Social Media</div>
+                <h3>Google Play publishing in progress</h3>
+                <p>
+                  This launch preview highlights the first BDT app wave and signals more creator and social media
+                  tools on the way.
+                </p>
+                <div class="product-badges" aria-label="Upcoming products">
+                  <span class="product-badge">Aight Bet</span>
+                  <span class="product-badge">Add Me</span>
+                  <span class="product-badge">More Coming Soon</span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
