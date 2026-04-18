@@ -781,10 +781,7 @@
     }
 
     .product-spotlight {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-      gap: 22px;
-      align-items: center;
+      max-width: 760px;
       margin-top: 20px;
       padding: 22px;
       border: 1px solid rgba(201, 168, 76, 0.16);
@@ -792,20 +789,6 @@
       background:
         radial-gradient(circle at top right, rgba(183, 28, 28, 0.14), transparent 30%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
-    }
-
-    .product-preview {
-      overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid rgba(201, 168, 76, 0.16);
-      background: rgba(0, 0, 0, 0.35);
-      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
-    }
-
-    .product-preview img {
-      display: block;
-      width: 100%;
-      height: auto;
     }
 
     .product-copy {
@@ -913,7 +896,6 @@
 
     @media (max-width: 640px) {
       .product-spotlight {
-        grid-template-columns: 1fr;
         padding: 18px;
       }
 
@@ -998,10 +980,6 @@
             </p>
 
             <div class="product-spotlight">
-              <div class="product-preview">
-                <img src="apps-announcement.jpg" alt="BDT Talent Group apps announcement featuring Aight Bet and Add Me" />
-              </div>
-
               <div class="product-copy">
                 <div class="section-kicker">Mobile Tools for Social Media</div>
                 <h3>Google Play publishing in progress</h3>
