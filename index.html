@@ -308,11 +308,9 @@
       margin-top: 4px;
     }
 
-    .contact-submit {
+    .contact-button {
       border: 1px solid rgba(201, 168, 76, 0.36);
       border-radius: 999px;
-      background: linear-gradient(180deg, rgba(201, 168, 76, 0.16), rgba(201, 168, 76, 0.08));
-      color: #f5e9bf;
       font-family: Arial, sans-serif;
       font-size: 0.74rem;
       font-weight: 700;
@@ -323,10 +321,26 @@
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
+    .contact-submit {
+      background: linear-gradient(180deg, rgba(201, 168, 76, 0.16), rgba(201, 168, 76, 0.08));
+      color: #f5e9bf;
+    }
+
     .contact-submit:hover {
       transform: translateY(-1px);
       border-color: rgba(201, 168, 76, 0.82);
       background: linear-gradient(180deg, rgba(201, 168, 76, 0.22), rgba(201, 168, 76, 0.12));
+    }
+
+    .contact-clear {
+      background: rgba(255, 255, 255, 0.04);
+      color: #d8d8d8;
+    }
+
+    .contact-clear:hover {
+      transform: translateY(-1px);
+      border-color: rgba(201, 168, 76, 0.58);
+      background: rgba(201, 168, 76, 0.08);
     }
 
     .contact-note {
@@ -769,8 +783,6 @@
       gap: 14px;
     }
 
-    .about-copy .section-copy { font-family: 'Georgia', serif; font-size: 1rem; line-height: 1.85; color: rgba(255,255,255,0.78); max-width: 760px; }
-
     .crew-panel {
       display: grid;
       grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
@@ -850,7 +862,13 @@
       color: #fff;
     }
 
-    
+    .section-copy {
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(255, 255, 255, 0.78);
+      max-width: 760px;
+    }
 
     .section-status {
       display: inline-flex;
@@ -980,8 +998,6 @@
       .about-copy {
         text-align: center;
       }
-
-      .about-copy 
 
       .crew-copy {
         text-align: center;
@@ -1158,7 +1174,8 @@
               </label>
 
               <div class="contact-actions">
-                <button class="contact-submit" type="submit">Send Message</button>
+                <button class="contact-button contact-submit" type="submit">Send Message</button>
+                <button class="contact-button contact-clear" type="reset">Clear Form</button>
               </div>
             </form>
           </section>
@@ -1291,6 +1308,15 @@
     }
 
     if (contactForm) {
+      contactForm.addEventListener('reset', () => {
+        window.setTimeout(() => {
+          const firstField = contactForm.querySelector('input, textarea');
+          if (firstField instanceof HTMLElement) {
+            firstField.focus();
+          }
+        }, 0);
+      });
+
       contactForm.addEventListener('submit', (event) => {
         event.preventDefault();
 
