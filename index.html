@@ -1077,6 +1077,59 @@
         justify-content: center;
       }
 
+      /* ── Mobile card luxury treatment ── */
+      .page-shell {
+        gap: 20px;
+      }
+
+      .section-shell,
+      .contact-card {
+        border-color: rgba(201, 168, 76, 0.38);
+        box-shadow:
+          0 0 0 1px rgba(201, 168, 76, 0.10),
+          0 4px 24px rgba(201, 168, 76, 0.10),
+          0 18px 48px rgba(0, 0, 0, 0.36);
+        border-radius: 24px;
+      }
+
+      /* Subtle top-edge shimmer on each card */
+      .section-shell::before,
+      .contact-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 18px;
+        right: 18px;
+        height: 1px;
+        background: linear-gradient(90deg,
+          transparent,
+          rgba(201, 168, 76, 0.55) 30%,
+          rgba(245, 233, 191, 0.72) 50%,
+          rgba(201, 168, 76, 0.55) 70%,
+          transparent
+        );
+        pointer-events: none;
+        border-radius: 0;
+      }
+
+      .section-block.is-current-section .section-shell,
+      .section-block.is-current-section .contact-card {
+        border-color: rgba(201, 168, 76, 0.58);
+        box-shadow:
+          0 0 0 1px rgba(201, 168, 76, 0.16),
+          0 6px 32px rgba(201, 168, 76, 0.14),
+          0 22px 56px rgba(0, 0, 0, 0.40);
+      }
+
+      .product-spotlight {
+        border-color: rgba(201, 168, 76, 0.32);
+        box-shadow:
+          0 0 0 1px rgba(201, 168, 76, 0.08),
+          0 8px 28px rgba(0, 0, 0, 0.28);
+        border-radius: 20px;
+        margin-top: 16px;
+      }
+
     }
 
     @media (max-width: 640px) {
@@ -1117,6 +1170,16 @@
         padding: 14px 12px;
         font-size: 0.68rem;
         letter-spacing: 0.16em;
+      }
+
+      /* ── Tightest mobile refinements ── */
+      .section-shell,
+      .contact-card {
+        border-radius: 20px;
+      }
+
+      .product-spotlight {
+        border-radius: 16px;
       }
 
     }
