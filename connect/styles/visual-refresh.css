@@ -30,10 +30,9 @@ body:has(.connect-hero-stage) > header {
   text-shadow: 0 12px 60px #e6c79415;
 }
 .connect-hero-stage .connect-showcase {
-  display: flex; align-items: end; min-height: 560px; padding: 24px;
+  display: flex; align-items: end; min-height: 0; padding: 24px;
   border: 1px solid #bfcadb30; border-radius: 32px;
-  background: url('../brand/connect-orbit.svg') center 8px / 100% 340px no-repeat,
-    radial-gradient(ellipse at 50% 20%, #41546c40, transparent 65%), #0e121b;
+  background: radial-gradient(ellipse at 50% 20%, #41546c40, transparent 65%), #0e121b;
   box-shadow: 0 35px 80px #0006, inset 0 1px #ffffff15;
 }
 .connect-hero-stage .connect-showcase::before,
@@ -131,10 +130,10 @@ body:has(.connect-hero-stage) > header {
 }
 @media (max-width: 1023px) {
   .connect-hero-stage { min-height: auto; }
-  .connect-hero-stage .connect-showcase { max-width: 620px; margin-inline: auto; min-height: 500px; background-size: 100% 280px; }
+  .connect-hero-stage .connect-showcase { max-width: 620px; margin-inline: auto; }
 }
 @media (max-width: 639px) {
-  .connect-hero-stage .connect-showcase { min-height: 480px; padding: 16px; border-radius: 24px; }
+  .connect-hero-stage .connect-showcase { padding: 16px; border-radius: 24px; }
   .connect-hero-stage h1 { font-size: clamp(2.5rem, 10.5vw, 3.6rem); }
   .connect-hero-stage h1 > span:last-child { font-size: clamp(2.5rem, 11vw, 3.8rem); }
   .connect-section, #faq { padding-inline: 20px; }
