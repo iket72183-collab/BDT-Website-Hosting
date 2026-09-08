@@ -1,0 +1,151 @@
+/* Presentation layer for the restored static export. Keep copy and app behavior in the export. */
+body:has(.connect-hero-stage) {
+  background: radial-gradient(ellipse at 95% 14%, #15222c66, transparent 28%),
+    radial-gradient(ellipse at 0% 44%, #32244944, transparent 28%), #090b10;
+}
+#top { --connect-gold: #e6c794; --connect-blue: #91cdd9; --connect-violet: #bca9e5; }
+#top .text-ink-muted { color: #bbb8b5; }
+#top .text-ink-subtle { color: #a49d93; }
+#top h1, #top h2, #top h3 { text-wrap: balance; }
+body:has(.connect-hero-stage) > header {
+  background: #090b10e8;
+  border-bottom: 1px solid #e6c79426;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 8px 35px #00000030;
+}
+.connect-hero-stage {
+  min-height: min(900px, 100svh);
+  background: radial-gradient(ellipse at 83% 35%, #425b7633, transparent 45%),
+    radial-gradient(ellipse at 0% 0%, #c9a88220, transparent 45%), #090b10;
+}
+.connect-hero-stage::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(#b5bcd208 1px, transparent 1px), linear-gradient(90deg, #b5bcd208 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(110deg, transparent 20%, #000, transparent);
+}
+.connect-hero-stage h1 { letter-spacing: -.045em; }
+.connect-hero-stage h1 > .text-metal-shimmer {
+  background-image: linear-gradient(110deg, #f2dfb8, #e0b77e 48%, #b6cbd8);
+  text-shadow: 0 12px 60px #e6c79415;
+}
+.connect-hero-stage .connect-showcase {
+  display: flex; align-items: end; min-height: 560px; padding: 24px;
+  border: 1px solid #bfcadb30; border-radius: 32px;
+  background: url('../brand/connect-orbit.svg') center 8px / 100% 340px no-repeat,
+    radial-gradient(ellipse at 50% 20%, #41546c40, transparent 65%), #0e121b;
+  box-shadow: 0 35px 80px #0006, inset 0 1px #ffffff15;
+}
+.connect-hero-stage .connect-showcase::before,
+.connect-hero-stage .connect-showcase::after,
+.connect-hero-stage .connect-showcase > [aria-hidden] { display: none; }
+.connect-hero-stage .connect-showcase > .grid { grid-template-columns: 1fr; gap: 10px; }
+.connect-signal {
+  border-color: #bfcadb25; border-radius: 14px;
+  background: linear-gradient(110deg, #202633ec, #10151eee);
+  box-shadow: 0 6px 18px #0002;
+  padding-left: 25px;
+}
+.connect-signal::before {
+  content: ""; position: absolute; left: 0; top: 20%; bottom: 20%; width: 2px;
+  background: var(--connect-gold); box-shadow: 0 0 16px var(--connect-gold);
+}
+.connect-signal:nth-child(2)::before { background: var(--connect-blue); }
+.connect-signal:nth-child(3)::before { background: var(--connect-violet); }
+.connect-section, #faq { padding-block: clamp(56px, 7vw, 104px); }
+.connect-section::before, #faq::before {
+  border-radius: 0; border-color: #bfcadb24;
+  background: radial-gradient(ellipse at 0% 0%, #e6c79408, transparent 55%);
+}
+.connect-section::after, #faq::after {
+  left: 40px; transform: none; width: 100px;
+  background: linear-gradient(90deg, #e6c794, #91cdd9, transparent);
+  box-shadow: 0 0 20px #91cdd930;
+}
+#how [data-reveal] > div {
+  background: linear-gradient(145deg, #1d202bd9, #0e1119);
+  border: 1px solid #bfcadb2b; box-shadow: 0 20px 40px #0003;
+}
+#how [data-reveal]:last-child > div {
+  background: radial-gradient(ellipse at 100% 0%, #e6c79422, transparent 70%), #151720;
+  border-color: #e6c79465; box-shadow: 0 20px 50px #0005, 0 0 35px #e6c79408;
+}
+#service-preview > [aria-hidden] { opacity: .35; }
+#service-preview .service-visual-card {
+  --service-accent: #e6c794;
+  background: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--service-accent) 12%, transparent), transparent 70%), #11151e;
+  border: 1px solid color-mix(in srgb, var(--service-accent) 28%, transparent);
+  border-radius: 22px; padding: 28px;
+  box-shadow: inset 0 1px #ffffff0c, 0 16px 35px #0003;
+}
+#service-preview [data-reveal-group] > :nth-child(2) .service-visual-card { --service-accent: #bca9e5; }
+#service-preview [data-reveal-group] > :nth-child(3) .service-visual-card { --service-accent: #91cdd9; }
+#service-preview [data-reveal-group] > :nth-child(4) .service-visual-card { --service-accent: #a5c7af; }
+#service-preview [data-reveal-group] > :nth-child(5) .service-visual-card { --service-accent: #e0b298; }
+#service-preview .service-visual-card::before {
+  position: relative; display: block; inset: auto; width: 52px; height: 52px; margin-bottom: 24px;
+  opacity: 1; border: 1px solid color-mix(in srgb, var(--service-accent) 35%, transparent);
+  border-radius: 15px;
+  background: url('../brand/connect-create.svg') center / 26px no-repeat, color-mix(in srgb, var(--service-accent) 9%, transparent);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--service-accent) 7%, transparent);
+}
+#service-preview [data-reveal-group] > :nth-child(2) .service-visual-card::before { background-image: url('../brand/connect-promote.svg'); }
+#service-preview [data-reveal-group] > :nth-child(3) .service-visual-card::before { background-image: url('../brand/connect-maintain.svg'); }
+#service-preview [data-reveal-group] > :nth-child(4) .service-visual-card::before { background-image: url('../brand/connect-report.svg'); }
+#service-preview [data-reveal-group] > :nth-child(5) .service-visual-card::before { background-image: url('../brand/connect-message.svg'); }
+#service-preview .service-visual-card > .text-caption { color: var(--service-accent); letter-spacing: .18em; }
+#service-preview .service-visual-card h3 { font-size: clamp(1.5rem, 2.2vw, 1.85rem); line-height: 1.15; }
+#service-preview .service-visual-card::after {
+  content: ""; position: absolute; top: 0; left: 28px; right: 28px; height: 1px;
+  background: linear-gradient(90deg, var(--service-accent), transparent); opacity: .75;
+}
+#plans .glass {
+  border-color: #bfcadb35;
+  background: linear-gradient(145deg, #202633, #11151e 65%);
+  box-shadow: 0 25px 60px #0005;
+}
+#plans .glass.metal-frame { border-color: #e6c79470; box-shadow: 0 25px 60px #0005, 0 0 55px #e6c7940c; }
+#plans .glass > .rounded-xl { background: #080c14b3; border-color: #bfcadb24; }
+#plans li { padding-block: 3px; }
+#faq button[aria-controls] { min-height: 90px; }
+#faq div:has(> button[aria-controls]) {
+  border-color: #bfcadb29; background: linear-gradient(110deg, #181d28, #10141c);
+  border-radius: 16px; box-shadow: 0 10px 30px #0002;
+}
+#faq div:has(> button[aria-expanded="true"]) { border-color: #e6c79470; background: #1d222d; }
+#faq button > [aria-hidden] { border-radius: 50%; background: #e6c7940c; }
+#connect-contact > .connect-showcase {
+  background: radial-gradient(ellipse at 5% 0%, #4c415230, transparent 65%), #111620;
+  border-color: #bfcadb35; border-radius: 28px;
+}
+#connect-contact .connect-showcase::before { border-color: #91cdd916; box-shadow: 0 0 0 38px #91cdd904, 0 0 0 76px #91cdd903; }
+#connect-contact form { background: #090e17b3; border-color: #bfcadb26; box-shadow: 0 20px 50px #0003; }
+#connect-contact input:not([type="hidden"]), #connect-contact textarea { background: #141b26; border-color: #bfcadb35; }
+#connect-contact input:focus, #connect-contact textarea:focus { border-color: #e6c794; }
+#top footer { background: #080b10; border-color: #bfcadb24; }
+@media (hover: hover) {
+  #service-preview .service-visual-card:hover {
+    border-color: var(--service-accent);
+    box-shadow: 0 22px 45px #0005, 0 0 25px color-mix(in srgb, var(--service-accent) 9%, transparent);
+  }
+}
+@media (max-width: 1023px) {
+  .connect-hero-stage { min-height: auto; }
+  .connect-hero-stage .connect-showcase { max-width: 620px; margin-inline: auto; min-height: 500px; background-size: 100% 280px; }
+}
+@media (max-width: 639px) {
+  .connect-hero-stage .connect-showcase { min-height: 480px; padding: 16px; border-radius: 24px; }
+  .connect-hero-stage h1 { font-size: clamp(2.5rem, 10.5vw, 3.6rem); }
+  .connect-hero-stage h1 > span:last-child { font-size: clamp(2.5rem, 11vw, 3.8rem); }
+  .connect-section, #faq { padding-inline: 20px; }
+  .connect-section::after, #faq::after { left: 20px; width: 64px; }
+  #service-preview .service-visual-card { padding: 24px; border-radius: 20px; }
+  #service-preview .service-visual-card::before { width: 46px; height: 46px; margin-bottom: 20px; }
+  #connect-contact > .connect-showcase { padding: 20px; }
+  #faq button[aria-controls] { min-height: 88px; }
+  #connect-contact input, #connect-contact textarea { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .connect-hero-stage .animate-fade-up { animation: none !important; opacity: 1; transform: none; }
+}
+#connect-contact input::placeholder, #connect-contact textarea::placeholder { color: #929ba9; opacity: 1; }
