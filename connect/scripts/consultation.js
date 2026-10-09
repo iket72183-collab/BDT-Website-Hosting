@@ -22,14 +22,6 @@ document.addEventListener('keydown', event => {
 });
 
 const form = document.querySelector('.inquiry-form');
-const mobileCta = document.querySelector('.mobile-cta');
-// Once visitors reach the inquiry, give its fields and submit button the screen.
-if (form && mobileCta && typeof IntersectionObserver !== 'undefined') {
-  const inquiryObserver = new IntersectionObserver(([entry]) => {
-    mobileCta.hidden = entry.isIntersecting;
-  });
-  inquiryObserver.observe(form);
-}
 form?.addEventListener('submit', async event => {
   event.preventDefault();
   const button = form.querySelector('button[type="submit"]');
@@ -54,6 +46,19 @@ form?.addEventListener('submit', async event => {
   } finally {
     clearTimeout(timeout);
     button.disabled = false;
-    button.textContent = 'Request a consultation';
+    button.textContent = 'Send inquiry';
   }
 });
+
+// Animate only when a section enters; content remains visible without JavaScript.
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+if (!motionPreference.matches && typeof IntersectionObserver !== 'undefined') {
+  const revealObserver = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      if (!motionPreference.matches) entry.target.classList.add('arriving');
+      revealObserver.unobserve(entry.target);
+    }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.section-head, .services .card, .process-list, .contact-panel').forEach(element => revealObserver.observe(element));
+}
