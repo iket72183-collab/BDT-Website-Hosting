@@ -12,6 +12,14 @@ if (toggle && menu) {
     toggle.setAttribute("aria-expanded", String(isOpen));
   });
 
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
+      menu.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.focus();
+    }
+  });
+
   menu.addEventListener("click", (event) => {
     const target = event.target;
     if (target instanceof HTMLAnchorElement) {
@@ -104,7 +112,7 @@ function showToast(message, isError = false) {
     transform: "translateX(-50%) translateY(16px)",
     zIndex: "9999",
     padding: "14px 24px",
-    borderRadius: "999px",
+    borderRadius: "18px",
     border: isError
       ? "1px solid rgba(255, 100, 100, 0.5)"
       : "1px solid rgba(201, 168, 76, 0.55)",
@@ -123,7 +131,11 @@ function showToast(message, isError = false) {
     backdropFilter: "blur(12px)",
     opacity: "0",
     transition: "opacity 280ms ease, transform 280ms ease",
-    whiteSpace: "nowrap",
+    width: "max-content",
+    maxWidth: "calc(100vw - 48px)",
+    whiteSpace: "normal",
+    overflowWrap: "anywhere",
+    boxSizing: "border-box",
     pointerEvents: "none",
   });
 
@@ -144,42 +156,10 @@ function showToast(message, isError = false) {
 }
 
 if (contactForm) {
-  contactForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const submitBtn = contactForm.querySelector('[type="submit"]');
-    const originalText = submitBtn ? submitBtn.textContent : "";
-    if (submitBtn) {
-      submitBtn.disabled = true;
-      submitBtn.textContent = "Sending…";
-    }
-
-    try {
-      const response = await fetch(contactForm.action, {
-        method: "POST",
-        body: new FormData(contactForm),
-        headers: { Accept: "application/json" },
-      });
-
-      if (response.ok) {
-        contactForm.reset();
-        showToast("✦ Message sent — we'll be in touch", false);
-      } else {
-        const data = await response.json().catch(() => ({}));
-        const msg =
-          data.errors && data.errors.length
-            ? data.errors.map((e) => e.message).join(", ")
-            : "Something went wrong. Please try again.";
-        showToast(msg, true);
-      }
-    } catch {
-      showToast("Network error — please check your connection.", true);
-    } finally {
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalText;
-      }
-    }
+  window.BDTForms.attach(contactForm, {
+    report: showToast,
+    sending: "Sending your message…",
+    success: "Message sent — we'll be in touch.",
   });
 }
 // ─────────────────────────────────────────────────────────────────────────────

@@ -23,3 +23,8 @@ jobs:
           python-version: "3.14"
       - name: Check internal links and assets
         run: python3 scripts/check_site.py
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+      - name: Test inquiry handling without network submissions
+        run: node --test scripts/test_forms.cjs

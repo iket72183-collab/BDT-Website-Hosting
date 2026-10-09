@@ -23,34 +23,17 @@ document.addEventListener('keydown', event => {
 });
 
 const form = document.querySelector('.inquiry-form');
-form?.addEventListener('submit', async event => {
-  event.preventDefault();
-  const button = form.querySelector('button[type="submit"]');
-  const status = form.querySelector('.form-status');
-  const originalButton = button.innerHTML;
-  if (button.disabled) return;
-  button.disabled = true;
-  button.textContent = 'Sending your request…';
-  status.hidden = false;
-  status.textContent = 'Sending your consultation request.';
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 20000);
-  try {
-    const response = await fetch(form.action, {
-      method: 'POST', body: new FormData(form),
-      headers: { Accept: 'application/json' }, signal: controller.signal,
-    });
-    if (!response.ok) throw new Error('Request not accepted');
-    status.textContent = 'Your request has been sent. BDT Talent Group will follow up by email to discuss your workflow and next steps.';
-    form.reset();
-  } catch {
-    status.textContent = 'We could not confirm delivery. Your details are still here. Please try again in a few minutes.';
-  } finally {
-    clearTimeout(timeout);
-    button.disabled = false;
-    button.innerHTML = originalButton;
-  }
-});
+if (form) {
+  window.BDTForms.attach(form, {
+    report(message) {
+      const status = form.querySelector('.form-status');
+      status.hidden = false;
+      status.textContent = message;
+    },
+    sending: 'Sending your consultation request…',
+    success: 'Your request has been sent. BDT Talent Group will follow up by email to discuss your workflow and next steps.',
+  });
+}
 
 // Animate only when a section enters; content remains visible without JavaScript.
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
