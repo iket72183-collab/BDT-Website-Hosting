@@ -1,14 +1,15 @@
 const toggle = document.querySelector('.menu-toggle');
+const toggleLabel = toggle?.querySelector('.menu-label') || toggle;
 const navigation = document.querySelector('#connect-nav');
 function closeMenu() {
   navigation?.classList.remove('is-open');
   toggle?.setAttribute('aria-expanded', 'false');
-  if (toggle) toggle.textContent = 'Menu';
+  if (toggleLabel) toggleLabel.textContent = 'Menu';
 }
 toggle?.addEventListener('click', () => {
   const open = toggle.getAttribute('aria-expanded') !== 'true';
   toggle.setAttribute('aria-expanded', String(open));
-  toggle.textContent = open ? 'Close' : 'Menu';
+  toggleLabel.textContent = open ? 'Close' : 'Menu';
   navigation.classList.toggle('is-open', open);
 });
 navigation?.addEventListener('click', event => {
@@ -26,6 +27,7 @@ form?.addEventListener('submit', async event => {
   event.preventDefault();
   const button = form.querySelector('button[type="submit"]');
   const status = form.querySelector('.form-status');
+  const originalButton = button.innerHTML;
   if (button.disabled) return;
   button.disabled = true;
   button.textContent = 'Sending your request…';
@@ -46,7 +48,7 @@ form?.addEventListener('submit', async event => {
   } finally {
     clearTimeout(timeout);
     button.disabled = false;
-    button.textContent = 'Send inquiry';
+    button.innerHTML = originalButton;
   }
 });
 

@@ -1,0 +1,99 @@
+/* Boutique consultation preview. No dependencies or continuous animation. */
+.hero-grid { grid-template-columns:1.1fr 1fr; gap:64px; padding-block:64px; }
+.hero:after { animation:none; }
+.hero-copy .eyebrow { font-size:.8rem; letter-spacing:.14em; }
+.hero-copy>p:not(.eyebrow) { font-size:1.125rem; max-width:490px; }
+.hero h1 { font-size:clamp(3.3rem,5.3vw,5.4rem); }
+.workflow-art { padding:30px; border-radius:160px 160px 8px 8px; background:radial-gradient(ellipse at 50% 0%,#54324366,transparent 70%),#1c1119; box-shadow:none; }
+.workflow-heading { text-align:center; padding-top:16px; }
+.art-kicker { font-size:.7rem; letter-spacing:.13em; }
+.art-title { font-size:2.45rem; margin:12px 0 26px; }
+.art-title br { display:block; }
+.workflow-cards { list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+.workflow-card { display:flex; align-items:center; gap:16px; position:relative; padding:18px; border:1px solid #e6cfac30; border-radius:5px; background:#281c23; }
+.workflow-card:not(:last-child):after { content:''; position:absolute; width:1px; height:13px; background:#d9b88088; bottom:-13px; left:38px; }
+.workflow-symbol { display:grid; place-items:center; width:38px; height:38px; flex:none; border:1px solid #d9b88050; border-radius:50%; color:#e0c393; }
+.workflow-symbol .icon { width:22px; height:22px; }
+.workflow-copy { flex:1; min-width:0; }
+.workflow-label { display:block; color:#d2b68f; font-size:.68rem; text-transform:uppercase; letter-spacing:.09em; margin-bottom:5px; }
+.workflow-card strong { font:500 1rem/1.4 var(--body); display:block; }
+.workflow-card small { font-size:.8rem; color:#c9bec7; display:block; margin-top:3px; }
+.document-lines { display:grid; gap:5px; margin-top:12px; }
+.document-lines i { height:3px; background:#d7c3b330; width:85%; border-radius:2px; }
+.document-lines i:last-child { width:58%; }
+.draft-pair { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
+.draft-pair i { display:block; height:2px; background:#d7c3b333; margin-top:6px; width:85%; }
+.draft-pair i:last-child { width:60%; }
+.draft-pair span { flex:1; font-size:.67rem; border:1px solid #d6c0a733; border-radius:3px; padding:8px 10px; color:#e5d9cc; background:#e1c89e09; }
+.workflow-card.approved { background:#ece0cd; border-color:#ece0cd; color:#3e2030; }
+.approved .workflow-label,.approved small { color:#715363; }
+.approved .workflow-symbol { color:#633348; border-color:#63334855; }
+.art-caption { text-align:center; font-size:.7rem; margin-top:20px; padding-top:16px; color:#c7b7bc; }
+.services .card { background:transparent; border-radius:0; box-shadow:none; }
+.services .card:hover { transform:none; box-shadow:none; }
+#how { background:linear-gradient(90deg,#3a1f2917,transparent); }
+.consultation-section { background:#f3ebdf; color:#39242c; border:0; padding-block:76px; scroll-margin-top:-24px; color-scheme:light; }
+.contact-panel { grid-template-columns:.9fr 1.1fr; gap:76px; padding:0; border:0; border-radius:0; box-shadow:none; background:none; }
+.contact-panel h2 { font-size:clamp(2.5rem,3.5vw,3.7rem); margin:15px 0 22px; color:#432330; }
+.contact-panel h2 .gold { color:#813f50; }
+.contact-panel .eyebrow { font-size:.8rem; letter-spacing:.14em; color:#813f50; }
+.contact-panel p { color:#6d5660; }
+.contact-panel>div>p:not(.eyebrow) { max-width:380px; font-size:1.05rem; }
+.consultation-section label { color:#482c38; font-size:.875rem; letter-spacing:0; gap:8px; }
+.consultation-section label small,.consultation-section .optional-fields summary small { color:#76616a; font-size:.8rem; }
+.consultation-section input,.consultation-section select,.consultation-section textarea { color:#35212a; background:#fffcf6; border:1px solid #9e838d; border-radius:3px; min-height:50px; font-size:1rem; }
+.consultation-section textarea { min-height:125px; }
+.consultation-section input::placeholder,.consultation-section textarea::placeholder { color:#7b6870; }
+.consultation-section .inquiry-form { gap:20px; }
+.consultation-section .optional-fields { border-color:#b19a9e88; }
+.consultation-section .optional-fields summary { color:#482c38; }
+.consultation-section .disclosure-icon { color:#813f50; }
+.consultation-section .form-note { font-size:.78rem; line-height:1.65; }
+.consultation-section .form-note a { color:#713449; text-underline-offset:3px; }
+.consultation-section .contact-note { border:0; padding:0; margin:0; font-size:.82rem; line-height:1.6; }
+.consultation-section .button { background:#582b3d; border-color:#582b3d; color:#fff5e6; min-height:56px; box-shadow:none; }
+.consultation-section .button:hover { background:#713a4e; }
+.consultation-section :focus-visible { outline-color:#813f50; outline-offset:3px; }
+.consultation-section .form-status { background:#fffaf2; border-color:#b49a9f; color:#582b3d; }
+.arriving { animation:none; }
+@media(max-width:1100px) { .hero-grid { gap:36px; } .workflow-art { padding:24px; } .workflow-card { padding:14px; gap:12px; } .contact-panel { gap:40px; } }
+@media(max-width:900px) {
+ .hero-grid { grid-template-columns:1fr; gap:32px; padding-block:40px; }
+ .hero h1 { font-size:clamp(3.1rem,9vw,4.5rem); }
+ .workflow-art { border-radius:8px; padding:22px; width:100%; }
+ .workflow-heading { padding:0; text-align:left; }
+ .art-kicker { display:none; }
+ .art-title br { display:none; }
+ .art-title { font-size:1.65rem; margin:0 0 18px; }
+ .workflow-cards { gap:0; }
+ .workflow-card { border:0; background:transparent; border-top:1px solid #d9b88030; border-radius:0; padding:14px 0; min-height:74px; }
+ .workflow-card:not(:last-child):after { display:none; }
+ .workflow-card.approved { border-radius:4px; padding:12px; margin-top:6px; }
+ .workflow-label { font-size:.62rem; margin-bottom:2px; }
+ .workflow-card strong { font-size:.92rem; }
+ .workflow-symbol { width:32px; height:32px; }
+ .document-lines,.draft-pair,.workflow-card small { display:none; }
+ .art-caption { margin-top:14px; padding-top:0; border:0; text-align:left; font-size:.66rem; }
+ .contact-panel { grid-template-columns:1fr; gap:24px; }
+ .consultation-section { padding-block:36px; scroll-margin-top:0; }
+ .contact-panel h2 { font-size:2.45rem; margin:8px 0 12px; }
+ .contact-panel h2 br { display:none; }
+ .contact-panel>div>p:not(.eyebrow) { max-width:none; font-size:1rem; }
+ .contact-panel .eyebrow { font-size:.7rem; }
+}
+@media(max-width:600px) {
+ .hero-grid { gap:28px; padding-block:36px; }
+ .hero h1 { font-size:3.15rem; margin:18px 0; }
+ .hero .actions { gap:12px; }
+ .hero-copy>p:not(.eyebrow) { font-size:1rem; }
+ .workflow-art { padding:18px; }
+ .art-title { font-size:1.45rem; margin-bottom:12px; }
+ .workflow-card { min-height:65px; padding-block:11px; }
+ .workflow-label { letter-spacing:.06em; }
+ .art-caption { margin-top:12px; }
+ .field-row { gap:18px; }
+ .contact-panel h2 { font-size:2.15rem; }
+ .consultation-section .contact-panel { padding:0; }
+ .services .card { padding:24px; }
+}
+@media(max-width:360px) { .hero h1 { font-size:2.75rem; } .workflow-card strong { font-size:.8rem; } .workflow-symbol { width:28px; height:28px; } }

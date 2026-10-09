@@ -930,3 +930,15 @@ input::placeholder,textarea::placeholder {
     transition:none!important;
   }
 }
+
+/* Font-independent interface symbols; text labels remain accessible. */
+.icon { width:20px; height:20px; flex:none; vertical-align:middle; display:inline-block; }
+.service-symbol .icon { width:32px; height:32px; }
+.footer-links a { gap:8px; }
+summary:after,details[open]>summary:after { content:none; }
+.disclosure-icon { margin-left:auto; color:var(--gold); }
+details[open]>summary .icon-vertical { display:none; }
+.menu-toggle { align-items:center; gap:12px; }
+.menu-toggle[aria-expanded="true"] .menu-upper { d:path("M5 5 19 19"); }
+.menu-toggle[aria-expanded="true"] .menu-lower { d:path("M5 19 19 5"); }
+@media(max-width:900px) { .menu-toggle { display:flex; } }
