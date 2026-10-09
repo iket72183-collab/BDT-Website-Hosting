@@ -50,7 +50,7 @@ form?.addEventListener('submit', async event => {
     status.textContent = 'Your request has been sent. BDT Talent Group will follow up by email to discuss your workflow and next steps.';
     form.reset();
   } catch {
-    status.textContent = 'We could not confirm delivery. Your details are still here. Try again, or email BDTTalentGroup@yahoo.com directly.';
+    status.textContent = 'We could not confirm delivery. Your details are still here. Please try again in a few minutes.';
   } finally {
     clearTimeout(timeout);
     button.disabled = false;

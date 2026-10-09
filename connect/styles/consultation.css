@@ -553,13 +553,6 @@ details[open] summary:after {
   font-weight:400;
   margin-bottom:10px;
 }
-.direct-email {
-  display:inline-block;
-  color:var(--gold);
-  font-size:12px;
-  margin-top:22px;
-  overflow-wrap:anywhere;
-}
 .inquiry-form {
   display:grid;
   gap:18px;
