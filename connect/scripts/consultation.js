@@ -45,5 +45,5 @@ if (!motionPreference.matches && typeof IntersectionObserver !== 'undefined') {
       revealObserver.unobserve(entry.target);
     }
   }, { threshold: 0.12 });
-  document.querySelectorAll('.section-head, .services .card, .process-list, .contact-panel').forEach(element => revealObserver.observe(element));
+  document.querySelectorAll('.section-head, .services .card, .workflow-card, .process-list > li, .faq-list details, .contact-panel > div').forEach(element => revealObserver.observe(element));
 }

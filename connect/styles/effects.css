@@ -1,0 +1,119 @@
+/* Lightweight finishing touches. Content is visible before scripts run.
+   Entrance effects play once; no timers, scroll handlers, or animation loops. */
+.hero:after {
+  width:110%;
+  height:110%;
+  background:radial-gradient(ellipse at 40% 40%,#ce9f6638,transparent 62%);
+}
+.hero h1 span {
+  background:linear-gradient(110deg,#d0a36b 5%,#f6e6c9 43%,#d5ad79 76%);
+  background-clip:text;
+  -webkit-background-clip:text;
+  color:transparent;
+}
+.workflow-art {
+  box-shadow:0 24px 80px #0003,inset 0 1px 0 #f3ddba20;
+}
+.services .card {
+  background:radial-gradient(ellipse at 0 0,#d9b88008,transparent 70%);
+  transition:border-color .3s,box-shadow .3s,transform .3s;
+}
+.services .card:before {
+  background:linear-gradient(90deg,#f2dbb6,#dab98744);
+}
+.hero .button {
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+.hero .button:before {
+  content:'';
+  position:absolute;
+  inset:-50% 0;
+  pointer-events:none;
+  background:linear-gradient(110deg,transparent 30%,#fff8e54d 50%,transparent 70%);
+  transform:translateX(-130%);
+}
+.faq-list summary {
+  transition:color .2s;
+}
+.faq-list details[open] summary {
+  color:var(--light);
+}
+.consultation-section input,.consultation-section select,.consultation-section textarea {
+  transition:box-shadow .2s,border-color .2s;
+}
+.consultation-section :is(input,select,textarea):focus-visible {
+  box-shadow:0 0 0 5px #813f5010;
+}
+@media(prefers-reduced-motion:no-preference) {
+  .hero:after {
+    animation:connect-light 4.5s ease-out backwards;
+  }
+  .hero-copy {
+    animation:connect-arrive .8s cubic-bezier(.2,.7,.2,1) backwards;
+  }
+  .arriving {
+    animation:connect-arrive .7s cubic-bezier(.2,.7,.2,1) backwards;
+  }
+  .workflow-card.arriving {
+    animation:connect-arrive .7s ease-out backwards,connect-outline 1.5s ease-out backwards;
+  }
+  .workflow-card:nth-child(2),.process-list>li:nth-child(2) { animation-delay:.12s; }
+  .workflow-card:nth-child(3),.process-list>li:nth-child(3) { animation-delay:.24s; }
+  .services .card.arriving:before {
+    animation:connect-line .9s ease-out backwards;
+    animation-delay:inherit;
+  }
+  .hero .button:focus-visible:before {
+    animation:connect-sheen .85s ease-out;
+  }
+  .faq-list details[open]>p {
+    animation:connect-answer .25s ease-out;
+  }
+}
+@media(hover:hover) and (pointer:fine) {
+  .services .card:hover {
+    border-color:#dab98788;
+    box-shadow:0 12px 32px #0004,inset 0 0 44px #d9b88009;
+  }
+  .faq-list summary:hover { color:var(--light); }
+  .nav-links>a {
+    background-image:linear-gradient(var(--gold),var(--gold));
+    background-size:0 1px;
+    background-position:0 100%;
+    background-repeat:no-repeat;
+    transition:background-size .25s,color .25s;
+  }
+  .nav-links>a:hover,.nav-links>a:focus-visible { background-size:100% 1px; }
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .services .card:hover { transform:translateY(-4px); }
+  .hero .button:hover:before { animation:connect-sheen .85s ease-out; }
+}
+@keyframes connect-light {
+  from { opacity:.2; transform:translate(-12%,-8%) scale(.9); }
+  to { opacity:1; transform:none; }
+}
+@keyframes connect-arrive {
+  from { opacity:.35; transform:translateY(14px); }
+  to { opacity:1; transform:none; }
+}
+@keyframes connect-outline {
+  0%,100% { box-shadow:0 0 0 1px transparent; }
+  35% { box-shadow:0 0 0 1px #dab98770,0 0 20px #dab98712; }
+}
+@keyframes connect-line {
+  from { transform:scaleX(.15); transform-origin:left; }
+  to { transform:scaleX(1); transform-origin:left; }
+}
+@keyframes connect-sheen {
+  to { transform:translateX(130%); }
+}
+@keyframes connect-answer {
+  from { opacity:.4; transform:translateY(-4px); }
+  to { opacity:1; transform:none; }
+}
+@media(forced-colors:active) {
+  .hero h1 span { background:none; color:CanvasText; }
+}
