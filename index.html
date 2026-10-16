@@ -351,7 +351,7 @@
     <section class="section promo-section" id="add-me" aria-labelledby="add-me-title">
       <div class="promo-grid reveal-card">
         <div class="promo-copy">
-          <p class="eyebrow">Add Me</p>
+          <p class="eyebrow">Add Me — Social Card</p>
           <h2 id="add-me-title">Your whole social life. One QR.</h2>
           <p>
             Add Me is your digital social card. Set it up once with your name, contact details, and the social handles you actually use—then share it all with a single scan.
@@ -369,14 +369,21 @@
           </div>
         </div>
         <div class="flyer-link">
-          <img
-            src="./assets/promos/add-me-flyer.png"
-            alt="Add Me promotional flyer showing a digital social card, QR code, and the message Every Handle, One Scan."
-            width="941"
-            height="1672"
-            loading="lazy"
-            decoding="async"
-          />
+          <picture>
+            <source
+              type="image/webp"
+              srcset="./assets/promos/add-me-social-card-banner-640.webp 640w, ./assets/promos/add-me-social-card-banner-official-stores.webp 941w"
+              sizes="(max-width: 640px) calc(100vw - 72px), 420px"
+            />
+            <img
+              src="./assets/promos/add-me-social-card-banner-official-stores.webp"
+              alt="Add Me — Social Card promotional banner featuring the BDT Talent Group logo, personal QR code, social handles, and official App Store and Google Play download badges."
+              width="941"
+              height="1672"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
         </div>
       </div>
     </section>
@@ -399,11 +406,11 @@
           </label>
           <label>
             <span>Full Name</span>
-            <input type="text" name="fullName" autocomplete="name" placeholder="Your full name" required />
+            <input type="text" name="fullName" autocomplete="name" placeholder="Your full name" maxlength="120" required />
           </label>
           <label>
             <span>Email Address</span>
-            <input type="email" name="email" autocomplete="email" placeholder="name@example.com" required />
+            <input type="email" name="email" autocomplete="email" placeholder="name@example.com" maxlength="254" required />
           </label>
           <label>
             <span>Inquiry Type</span>
@@ -423,7 +430,7 @@
           </label>
           <label>
             <span>Inquiry</span>
-            <textarea name="message" rows="5" placeholder="Tell us about your project, talent inquiry, or partnership opportunity." required></textarea>
+            <textarea name="message" rows="5" placeholder="Tell us about your project, talent inquiry, or partnership opportunity." maxlength="5000" required></textarea>
           </label>
           <div class="form-actions">
             <button class="button button-primary" type="submit">Send Message</button>

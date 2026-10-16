@@ -1544,7 +1544,19 @@ textarea:focus-visible {
   }
 
   .flyer-link {
-    margin: 2px auto 0;
+    width: 100%;
+    max-width: 390px;
+    margin: 4px auto 0;
+  }
+
+  .flyer-link picture {
+    display: block;
+    width: 100%;
+  }
+
+  .flyer-link img {
+    aspect-ratio: 941 / 1672;
+    object-fit: cover;
   }
 
   .section-heading h2,
