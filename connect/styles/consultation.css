@@ -942,3 +942,11 @@ details[open]>summary .icon-vertical { display:none; }
 .menu-toggle[aria-expanded="true"] .menu-upper { d:path("M5 5 19 19"); }
 .menu-toggle[aria-expanded="true"] .menu-lower { d:path("M5 19 19 5"); }
 @media(max-width:900px) { .menu-toggle { display:flex; } }
+
+/* Editorial freshness: dates are authored in HTML, not generated at runtime. */
+.page-updated {
+  color: #c9bfcc;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 12px 0 18px;
+}

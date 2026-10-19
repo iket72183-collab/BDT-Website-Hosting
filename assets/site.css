@@ -1624,3 +1624,11 @@ textarea:focus-visible {
     margin-bottom: 16px;
   }
 }
+
+/* Editorial freshness: dates are authored in HTML, not generated at runtime. */
+.page-updated {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 12px 0 18px;
+}
