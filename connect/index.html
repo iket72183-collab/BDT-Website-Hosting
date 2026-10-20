@@ -24,6 +24,8 @@
   <link href="/connect/styles/consultation.css?v=20261019-aeo" rel="stylesheet"/>
   <link href="/connect/styles/boutique-preview.css" rel="stylesheet"/>
   <link href="/connect/styles/effects.css?v=20261009" rel="stylesheet"/>
+  <link href="/connect/styles/experience.css?v=20261019" rel="stylesheet"/>
+  <script defer src="/connect/scripts/experience.js?v=20261019"></script>
   <script defer="" src="/assets/form-handler.js?v=20261009"></script>
   <script defer="" src="/connect/scripts/consultation.js?v=20261009-effects">
   </script>
@@ -69,34 +71,50 @@
   </header>
   <main id="main">
    <section aria-labelledby="hero-title" class="hero">
+    <div class="hero-atmosphere" aria-hidden="true"><span class="light-field"></span><span class="orbit orbit-one"></span><span class="orbit orbit-two"></span><span class="orbit orbit-three"></span></div>
     <div class="wrap hero-grid">
      <div class="hero-copy">
       <p class="eyebrow">BDT Talent Group / AI consultation</p>
-      <h1 id="hero-title">BDT Connect</h1>
+      <h1 id="hero-title">BDT <span>Connect</span></h1>
+      <p class="hero-definition">BDT Connect is BDT Talent Group’s AI consultation service. As of October 2026, it offers AI planning, agent setup, and workflow automation for businesses.</p>
+      <p class="hero-promise">AI that fits the way you work.</p>
+      <p class="hero-support">Less busywork. More room for what you do best.</p>
       <p class="page-updated">Last updated: <time datetime="2026-10-19">October 19, 2026</time></p>
-      <p>BDT Connect is BDT Talent Group’s AI consultation service. As of October 2026, it offers AI planning, agent setup, and workflow automation for businesses.</p>
-      <p>AI that fits the way you work. Less busywork. More room for what you do best.</p>
       <div class="actions">
        <a class="button" href="#connect-contact">Request a consultation <span aria-hidden="true"><svg class="icon " aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18 18 6M6 6h12v12"/></svg></span></a>
       </div>
      </div>
-     <div class="workflow-art" role="group" aria-label="Illustrative workflow: an inquiry, an organized brief and draft response, then human approval">
+     <div class="workflow-art" data-spotlight role="group" aria-label="Illustrative workflow: an inquiry, an organized brief and draft response, then human approval">
+      <div class="workflow-halo" aria-hidden="true"><i></i><i></i><i></i><span></span></div>
       <div class="workflow-heading"><p class="art-kicker">Your work. A little lighter.</p><p class="art-title">From incoming <br/>to <em>in hand.</em></p></div>
       <ol class="workflow-cards">
-       <li class="workflow-card incoming"><span class="workflow-symbol"><svg class="icon " aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div class="workflow-copy"><span class="workflow-label">01 / Incoming inquiry</span><strong>A task that needs attention.</strong><div class="document-lines" aria-hidden="true"><i></i><i></i></div></div></li>
-       <li class="workflow-card prepared"><span class="workflow-symbol"><svg class="icon " aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H5v18h14V8Z M14 3v5h5M8 12h8m-8 4h5"/></svg></span><div class="workflow-copy"><span class="workflow-label">02 / AI prepares</span><strong>Organized brief + draft response</strong><div class="draft-pair" aria-hidden="true"><span>Organized brief<i></i><i></i></span><span>Draft response<i></i><i></i></span></div></div></li>
-       <li class="workflow-card approved"><span class="workflow-symbol"><svg class="icon " aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></span><div class="workflow-copy"><span class="workflow-label">03 / Your review</span><strong>You make the call.</strong><small>Review. Refine. Approve.</small></div></li>
+       <li class="workflow-card incoming" id="workflow-step-1"><span class="workflow-symbol"><svg class="icon " aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><div class="workflow-copy"><span class="workflow-label">01 / Incoming inquiry</span><strong>A task that needs attention.</strong><div class="document-lines" aria-hidden="true"><i></i><i></i></div></div></li>
+       <li class="workflow-card prepared" id="workflow-step-2"><span class="workflow-symbol"><svg class="icon " aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H5v18h14V8Z M14 3v5h5M8 12h8m-8 4h5"/></svg></span><div class="workflow-copy"><span class="workflow-label">02 / AI prepares</span><strong>Organized brief + draft response</strong><div class="draft-pair" aria-hidden="true"><span>Organized brief<i></i><i></i></span><span>Draft response<i></i><i></i></span></div></div></li>
+       <li class="workflow-card approved" id="workflow-step-3"><span class="workflow-symbol"><svg class="icon " aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></span><div class="workflow-copy"><span class="workflow-label">03 / Your review</span><strong>You make the call.</strong><small>Review. Refine. Approve.</small></div></li>
       </ol>
+      <div class="workflow-controls" hidden>
+       <div class="workflow-stages" role="group" aria-label="Explore the illustrative workflow">
+        <button type="button" data-step="0" aria-controls="workflow-step-1" aria-pressed="false"><span>01</span> Capture</button>
+        <button type="button" data-step="1" aria-controls="workflow-step-2" aria-pressed="false"><span>02</span> Prepare</button>
+        <button type="button" data-step="2" aria-controls="workflow-step-3" aria-pressed="false"><span>03</span> Review</button>
+       </div>
+       <button type="button" class="workflow-play" aria-label="Play illustrative workflow"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none"><path d="m7 4 9 6-9 6Z" stroke="currentColor" stroke-width="1.2"/></svg><span>Play</span></button>
+      </div>
       <p class="art-caption">Illustrative workflow / Your process comes first.</p>
      </div>
     </div>
+    <nav class="capability-rail wrap" aria-label="Explore BDT Connect capabilities">
+     <a href="#ai-plan"><span class="rail-number">01</span><span>AI strategy</span><span aria-hidden="true">↗</span></a>
+     <a href="#agent-setup"><span class="rail-number">02</span><span>Agent setup</span><span aria-hidden="true">↗</span></a>
+     <a href="#workflow-design"><span class="rail-number">03</span><span>Connected workflows</span><span aria-hidden="true">↗</span></a>
+    </nav>
    </section>
    <section aria-labelledby="services-title" class="section wrap" id="service-preview">
     <div class="section-head"><p class="eyebrow">What’s possible</p><h2 id="services-title">How can BDT Connect <span class="gold">help your business?</span></h2><p>Start with one thing you’d like to make easier.</p></div>
     <div class="services">
-     <article class="card"><p class="eyebrow">Find your direction</p><h3>A practical AI plan.</h3><p>Find where AI can help, choose the right tools, and leave with a clear first step.</p></article>
-     <article class="card"><p class="eyebrow">Get time back</p><h3>Agents with a job.</h3><p>Research, sort inquiries, or prepare content drafts — with your review built in.</p></article>
-     <article class="card"><p class="eyebrow">Connect the dots</p><h3>A smoother workflow.</h3><p>Connect your tools, automate the handoffs, and give your team a process they can run.</p></article>
+     <article class="card" id="ai-plan" data-spotlight><span class="service-index" aria-hidden="true">01</span><p class="eyebrow">Find your direction</p><h3>A practical AI plan.</h3><p>Find where AI can help, choose the right tools, and leave with a clear first step.</p></article>
+     <article class="card" id="agent-setup" data-spotlight><span class="service-index" aria-hidden="true">02</span><p class="eyebrow">Get time back</p><h3>Agents with a job.</h3><p>Research, sort inquiries, or prepare content drafts — with your review built in.</p></article>
+     <article class="card" id="workflow-design" data-spotlight><span class="service-index" aria-hidden="true">03</span><p class="eyebrow">Connect the dots</p><h3>A smoother workflow.</h3><p>Connect your tools, automate the handoffs, and give your team a process they can run.</p></article>
     </div>
    </section>
    <section aria-labelledby="how-title" class="section wrap" id="how">
