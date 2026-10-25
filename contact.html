@@ -135,11 +135,11 @@
         </label>
         <label>
           <span>Full Name</span>
-          <input type="text" name="fullName" autocomplete="name" placeholder="Your full name" required />
+          <input type="text" name="fullName" autocomplete="name" placeholder="Your full name" maxlength="120" required />
         </label>
         <label>
           <span>Email Address</span>
-          <input type="email" name="email" autocomplete="email" placeholder="name@example.com" required />
+          <input type="email" name="email" autocomplete="email" placeholder="name@example.com" maxlength="254" required />
         </label>
         <label>
           <span>Inquiry Type</span>
@@ -159,7 +159,7 @@
         </label>
         <label>
           <span>Inquiry</span>
-          <textarea name="message" rows="5" placeholder="Tell us about your project, talent inquiry, or partnership opportunity." required></textarea>
+          <textarea name="message" rows="5" placeholder="Tell us about your project, talent inquiry, or partnership opportunity." maxlength="5000" required></textarea>
         </label>
         <div class="form-actions">
           <button class="button button-primary" type="submit">Send Message</button>

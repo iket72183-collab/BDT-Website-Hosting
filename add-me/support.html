@@ -67,8 +67,8 @@
         <input type="hidden" name="_subject" value="Add Me app support request" />
         <input type="hidden" name="product" value="Add Me" />
         <label class="hidden-field" aria-hidden="true">Company Name<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" /></label>
-        <label><span>Full Name</span><input type="text" name="fullName" autocomplete="name" placeholder="Your full name" required /></label>
-        <label><span>Email Address</span><input type="email" name="email" autocomplete="email" placeholder="name@example.com" required /></label>
+        <label><span>Full Name</span><input type="text" name="fullName" autocomplete="name" placeholder="Your full name" maxlength="120" required /></label>
+        <label><span>Email Address</span><input type="email" name="email" autocomplete="email" placeholder="name@example.com" maxlength="254" required /></label>
         <label>
           <span>Support Topic</span>
           <select name="supportTopic" required>
@@ -81,7 +81,7 @@
             <option value="other">Other</option>
           </select>
         </label>
-        <label><span>Message</span><textarea name="message" rows="6" placeholder="Describe what happened and the device you are using." required></textarea></label>
+        <label><span>Message</span><textarea name="message" rows="6" placeholder="Describe what happened and the device you are using." maxlength="5000" required></textarea></label>
         <div class="form-actions">
           <button class="button button-primary" type="submit">Send Support Request</button>
           <button class="button button-secondary" type="reset">Clear Form</button>
