@@ -174,8 +174,9 @@ let revealObserver = null;
 
 document.querySelectorAll(".service-grid, .product-grid").forEach((group) => {
   group.querySelectorAll(".reveal, .reveal-card").forEach((item, index) => {
-    const step = window.innerWidth <= 640 ? 50 : 55;
-    const maximum = window.innerWidth <= 640 ? 100 : 165;
+    // Cinematic stagger: cards cascade in sequence; capped so late cards never feel slow.
+    const step = window.innerWidth <= 640 ? 60 : 95;
+    const maximum = window.innerWidth <= 640 ? 120 : 285;
     item.style.setProperty("--reveal-delay", `${Math.min(index * step, maximum)}ms`);
   });
 });

@@ -45,6 +45,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/site.css?v=20261019-aeo" />
+  <link rel="stylesheet" href="./assets/cinematic.css?v=20261024" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -168,19 +169,21 @@
 
   <main id="main">
     <section class="hero section" id="top" aria-labelledby="hero-title">
-      <div class="hero-launch reveal">
-        <img
-          class="hero-logo"
-          src="./assets/bdt-logo.jpeg"
-          alt="BDT Talent Group logo"
-          width="1200"
-          height="804"
-          fetchpriority="high"
-          decoding="async"
-        />
+      <div class="hero-launch">
+        <div class="hero-logo-frame">
+          <img
+            class="hero-logo"
+            src="./assets/bdt-logo.jpeg"
+            alt="BDT Talent Group logo"
+            width="1200"
+            height="804"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </div>
         <p class="eyebrow">Entertainment-tech company</p>
         <h1 id="hero-title" class="hero-mission">
-          AI-Powered Talent.
+          <span class="hero-line">AI-Powered Talent.</span>
           <span class="hero-mission-accent">Human-Centered <span class="mission-break">Culture.</span></span>
         </h1>
         <p class="hero-tagline">
@@ -200,6 +203,7 @@
     <section class="section about-section" id="about" aria-labelledby="about-title">
       <div class="section-card two-column reveal-card">
         <div class="portrait-frame">
+          <div class="media-frame">
           <img
             src="./assets/BDT_website_pic.jpg"
             alt="Portrait of Isaac Tran, founder of BDT Talent Group"
@@ -208,6 +212,7 @@
             loading="lazy"
             decoding="async"
           />
+          </div>
         </div>
         <div>
           <p class="eyebrow">BDT Talent Group</p>
@@ -230,7 +235,8 @@
       </div>
 
       <figure class="wide-image reveal-card">
-        <img
+        <div class="media-frame">
+          <img
           src="./assets/Riverdale_Crew.jpg"
           alt="Illustration of the Riverdale Crew AI agents, Archie, Betty, and Veronica"
           width="1177"
@@ -238,13 +244,15 @@
           loading="lazy"
           decoding="async"
         />
+        </div>
         <figcaption>
           <p class="crew-caption-intro"><strong>The Riverdale Crew</strong> supports technical systems, research, content direction, outreach, and partnerships across the BDT ecosystem.</p>
         </figcaption>
       </figure>
 
       <figure class="wide-image reveal-card">
-        <img
+        <div class="media-frame">
+          <img
           src="./assets/hermes-gang-1280.webp"
           srcset="./assets/hermes-gang-640.webp 640w, ./assets/hermes-gang-1280.webp 1280w, ./assets/hermes-gang-1916.webp 1916w"
           sizes="(max-width: 640px) calc(100vw - 54px), (max-width: 1160px) calc(100vw - 66px), 1094px"
@@ -254,6 +262,7 @@
           loading="lazy"
           decoding="async"
         />
+        </div>
         <figcaption>
           <p class="crew-caption-intro"><strong>The Hermes Gang</strong> helps build and maintain BDT's AI tools and workflows, with dedicated agents supporting financial analysis and authorized security work.</p>
         </figcaption>
@@ -286,23 +295,23 @@
     </section>
 
     <section class="section" id="service-fit" aria-labelledby="service-fit-title">
-      <div class="section-heading">
+      <div class="section-heading reveal">
         <p class="eyebrow">Find your fit</p>
         <h2 id="service-fit-title">Which BDT service is right for you?</h2>
         <p>Use these starting points. Project scope and pricing are agreed before paid work begins.</p>
       </div>
       <div class="service-grid">
-        <article class="service-card">
+        <article class="service-card reveal-card">
           <h3>AI consultation and workflow automation</h3>
           <p>If you’re a business owner or small team and you need help reducing repetitive work, BDT Connect is the fit because it offers AI consultation, agent setup, and workflow automation around your existing process, with human review built in.</p>
           <a class="text-link" href="/connect/">Discuss your workflow with BDT Connect</a>
         </article>
-        <article class="service-card">
+        <article class="service-card reveal-card">
           <h3>App and web development inquiries</h3>
           <p>If you’re a creator or brand and you need to discuss a mobile app or web experience, BDT Tech is the fit because it is BDT’s technology branch, building mobile products and websites. Start with a project inquiry to confirm scope and availability.</p>
           <a class="text-link" href="#contact">Ask BDT Tech about your project</a>
         </article>
-        <article class="service-card">
+        <article class="service-card reveal-card">
           <h3>Sharing your social and contact details</h3>
           <p>If you’re a creator or professional and you need to share your contact details and social handles in one scan, BDT’s Add Me is the fit because its digital social card brings those details together behind a personal QR code.</p>
           <a class="text-link" href="/add-me/">Explore Add Me</a>
@@ -416,11 +425,11 @@
     </section>
 
     <section class="section" id="updates" aria-labelledby="updates-title">
-      <div class="section-heading">
+      <div class="section-heading reveal">
         <p class="eyebrow">Updates</p>
         <h2 id="updates-title">What’s new at BDT?</h2>
       </div>
-      <article class="section-card">
+      <article class="section-card reveal-card">
         <p><time datetime="2026-10-19">October 19, 2026</time></p>
         <h3>Clearer guidance on BDT services</h3>
         <p>Added a guide to choosing between BDT Connect, BDT Tech, and Add Me, with dated service descriptions and development status for Productions and Enterprises.</p>
@@ -438,7 +447,7 @@
           </p>
         </div>
 
-        <form class="contact-form" action="https://formspree.io/f/mojykkbw" method="POST">
+        <form class="contact-form reveal-card" action="https://formspree.io/f/mojykkbw" method="POST">
           <input type="hidden" name="_subject" value="BDT Talent Group website inquiry" />
           <label class="hidden-field" aria-hidden="true">
             Company Name
@@ -498,6 +507,7 @@
   </footer>
 
   <script src="./assets/form-handler.js?v=20261009" defer></script>
-  <script src="./assets/site.js?v=20261009-forms" defer></script>
+  <script src="./assets/site.js?v=20261024-cine" defer></script>
+  <script src="./assets/cinematic.js?v=20261024" defer></script>
 </body>
 </html>

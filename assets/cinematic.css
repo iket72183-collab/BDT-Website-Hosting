@@ -1,0 +1,433 @@
+/*
+ * BDT Talent Group — cinematic motion layer.
+ *
+ * Progressive enhancement on top of site.css. Principles:
+ *  - Native scrolling only (no scroll hijacking); motion is driven by
+ *    compositor-friendly properties (transform / translate / scale / opacity).
+ *  - Every hidden state is gated behind a class that JavaScript adds only after
+ *    its observers are ready, so a script failure can never hide content.
+ *  - prefers-reduced-motion disables everything below.
+ * Removing this file and cinematic.js restores the previous experience.
+ */
+
+:root {
+  --cine-ease: cubic-bezier(0.22, 1, 0.36, 1); /* ease-out-quint */
+  --cine-header-h: 76px;
+}
+
+/* Anchor jumps land below the sticky header instead of underneath it. */
+html {
+  scroll-padding-top: calc(var(--cine-header-h) + 14px);
+}
+
+/* ── Ambient depth layer (injected by cinematic.js, decorative) ───────────── */
+.cine-ambient {
+  position: fixed;
+  inset: -25vh -10vw;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(38vmax 38vmax at 16% 24%, rgba(201, 168, 76, 0.075), transparent 70%),
+    radial-gradient(44vmax 44vmax at 86% 62%, rgba(106, 31, 168, 0.1), transparent 70%),
+    radial-gradient(30vmax 30vmax at 40% 96%, rgba(139, 0, 0, 0.06), transparent 70%);
+  contain: strict;
+}
+
+/* ── Header: quieter at rest, more solid once content passes beneath ──────── */
+.site-header {
+  transition:
+    background-color 500ms var(--cine-ease),
+    border-color 500ms var(--cine-ease),
+    box-shadow 500ms var(--cine-ease);
+}
+
+.site-header.is-scrolled {
+  background: rgba(6, 6, 6, 0.92);
+  border-bottom-color: rgba(201, 168, 76, 0.14);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.36);
+}
+
+/* Reading-progress hairline, driven entirely by the compositor where supported. */
+@supports (animation-timeline: scroll()) {
+  .site-header::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(201, 168, 76, 0), var(--gold) 40%, var(--gold-light));
+    transform-origin: 0 50%;
+    transform: scaleX(0);
+    animation: cine-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes cine-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ── Hero entrance (pure CSS: runs without JavaScript, ends fully visible) ── */
+.hero-logo-frame {
+  position: relative;
+  width: min(calc(100vw - 40px), 640px);
+  max-width: 640px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(201, 168, 76, 0.24);
+  border-radius: 8px;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.46), 0 0 44px rgba(201, 168, 76, 0.1);
+}
+
+.hero-logo-frame .hero-logo {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* A single, slow light sweep across the logo once it has settled. */
+.hero-logo-frame::after {
+  content: "";
+  position: absolute;
+  inset: -10% auto -10% 0;
+  width: 38%;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(245, 233, 191, 0.16) 45%, rgba(255, 255, 255, 0.22) 50%, rgba(245, 233, 191, 0.16) 55%, transparent);
+  transform: translate3d(-140%, 0, 0) skewX(-16deg);
+  animation: cine-sweep 1600ms var(--cine-ease) 1250ms both;
+}
+
+.hero-line {
+  display: block;
+}
+
+.hero-logo-frame {
+  animation: cine-logo-in 1500ms var(--cine-ease) 60ms both;
+}
+
+.hero-launch > .eyebrow {
+  animation: cine-rise 1000ms var(--cine-ease) 320ms both;
+}
+
+.hero-line {
+  animation: cine-mask-rise 1200ms var(--cine-ease) 430ms both;
+}
+
+.hero-mission-accent {
+  animation: cine-mask-rise 1200ms var(--cine-ease) 560ms both;
+}
+
+.hero-tagline {
+  animation: cine-rise 1000ms var(--cine-ease) 760ms both;
+}
+
+.hero-lede {
+  animation: cine-rise 1000ms var(--cine-ease) 860ms both;
+}
+
+.hero-launch > .page-updated {
+  animation: cine-rise 1000ms var(--cine-ease) 930ms both;
+}
+
+.hero-launch > .hero-actions {
+  animation: cine-rise 1000ms var(--cine-ease) 1000ms both;
+}
+
+@keyframes cine-logo-in {
+  from {
+    opacity: 0;
+    transform: scale(1.045);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cine-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Line rises from behind an invisible baseline mask. Generous negative
+   insets keep italic overhangs, descenders and the gold glow unclipped. */
+@keyframes cine-mask-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0);
+    clip-path: inset(-1em -1em 100% -1em);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(-1em -1em -1em -1em);
+  }
+}
+
+@keyframes cine-sweep {
+  to {
+    transform: translate3d(360%, 0, 0) skewX(-16deg);
+  }
+}
+
+/* ── Scroll reveals: longer, softer, more deliberate ─────────────────────── */
+.reveal,
+.reveal-card {
+  --reveal-duration: 950ms;
+}
+
+.reveal-enabled .reveal.reveal-pending,
+.reveal-enabled .reveal-card.reveal-pending {
+  --reveal-y: 30px;
+}
+
+/* Section headings: the block holds still; eyebrow → title → copy cascade. */
+.reveal-enabled .section-heading.reveal.reveal-pending {
+  --reveal-y: 0px;
+  opacity: 1;
+}
+
+.reveal-enabled .section-heading.reveal-pending > * {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+}
+
+.reveal-enabled .section-heading.reveal-pending > h2 {
+  transform: translate3d(0, 0.55em, 0);
+  clip-path: inset(-1em -1em 0.55em -1em);
+}
+
+.reveal-enabled .section-heading.reveal-pending.is-visible > * {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 900ms var(--cine-ease),
+    transform 1100ms var(--cine-ease),
+    clip-path 1100ms var(--cine-ease);
+}
+
+.reveal-enabled .section-heading.reveal-pending.is-visible > h2 {
+  clip-path: inset(-1em -1em -1em -1em);
+  transition-delay: 90ms;
+}
+
+.reveal-enabled .section-heading.reveal-pending.is-visible > p:not(.eyebrow) {
+  transition-delay: 200ms;
+}
+
+/* Images settle inside their frames as their card arrives. */
+.media-frame {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  border-radius: 8px;
+}
+
+.media-frame img,
+.portrait-frame .media-frame img {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  scale: calc(var(--cine-cover, 1) + var(--cine-settle, 0));
+  transition: scale 1600ms var(--cine-ease);
+}
+
+.portrait-frame .media-frame {
+  width: min(100%, 360px);
+  margin: 0 auto;
+}
+
+.reveal-enabled .reveal-pending:not(.is-visible) .media-frame img {
+  --cine-settle: 0.06;
+  transition: none;
+}
+
+/* Section dividers draw outward from the centre as each section enters. */
+.cine-ready .section:not(:first-of-type)::before {
+  transform: scaleX(0);
+  transition: transform 1400ms var(--cine-ease);
+}
+
+.cine-ready .section.is-inview::before {
+  transform: scaleX(1);
+}
+
+/* ── Parallax (enabled by cinematic.js on large, fine-pointer screens) ────── */
+.cine-parallax .media-frame {
+  --cine-cover: 1.1;
+}
+
+.cine-parallax .media-frame img,
+.cine-parallax .flyer-link,
+.cine-parallax .hero-launch {
+  will-change: translate;
+}
+
+/* ── Interactions: buttons, links, cards ─────────────────────────────────── */
+.button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 450ms var(--cine-ease),
+    border-color 300ms ease,
+    background 300ms ease,
+    color 300ms ease,
+    box-shadow 450ms var(--cine-ease);
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(110deg, transparent 30%, rgba(245, 233, 191, 0.2) 50%, transparent 70%);
+  transform: translate3d(-120%, 0, 0);
+  transition: transform 900ms var(--cine-ease);
+}
+
+.button:focus-visible {
+  outline-offset: 4px;
+  box-shadow: 0 0 0 5px rgba(201, 168, 76, 0.16), 0 22px 58px rgba(201, 168, 76, 0.16);
+}
+
+.text-link {
+  position: relative;
+  align-self: flex-start;
+  gap: 8px;
+}
+
+.text-link::after {
+  content: "→";
+  display: inline-block;
+  transition: transform 450ms var(--cine-ease);
+}
+
+.text-link:hover {
+  text-decoration: none;
+}
+
+.text-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 1.4em;
+  bottom: -4px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.7;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 500ms var(--cine-ease);
+}
+
+.text-link:hover::before,
+.text-link:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.text-link:hover::after,
+.text-link:focus-visible::after {
+  transform: translate3d(4px, 0, 0);
+}
+
+.service-card,
+.product-card,
+.promo-grid,
+.section-card,
+.wide-image,
+.contact-form {
+  transition-timing-function: var(--cine-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover::before {
+    transform: translate3d(120%, 0, 0);
+  }
+
+  /* Soft gold spotlight follows the cursor (cinematic.js sets --mx / --my). */
+  .section-card::before,
+  .service-card::before,
+  .product-card::before,
+  .promo-grid::before,
+  .wide-image::before,
+  .contact-form::before {
+    background:
+      radial-gradient(circle at var(--mx, 50%) var(--my, 12%), rgba(241, 215, 143, 0.085), transparent 38%),
+      radial-gradient(circle at 88% 6%, rgba(216, 189, 120, 0.045), transparent 28%),
+      radial-gradient(circle at 6% 100%, rgba(139, 0, 0, 0.045), transparent 34%),
+      linear-gradient(140deg, rgba(255, 255, 255, 0.025), transparent 34%, rgba(201, 168, 76, 0.018) 72%, transparent);
+  }
+}
+
+/* ── Small screens: calmer distances, quicker timings, no masks ───────────── */
+@media (max-width: 640px) {
+  .reveal,
+  .reveal-card {
+    --reveal-duration: 680ms;
+  }
+
+  .reveal-enabled .reveal.reveal-pending,
+  .reveal-enabled .reveal-card.reveal-pending {
+    --reveal-y: 18px;
+  }
+
+  .reveal-enabled .section-heading.reveal-pending > h2 {
+    clip-path: none;
+    transform: translate3d(0, 16px, 0);
+  }
+
+  .hero-line,
+  .hero-mission-accent {
+    animation-name: cine-rise;
+  }
+
+  .hero-logo-frame {
+    width: min(calc(100vw - 40px), 640px);
+  }
+}
+
+/* ── Reduced motion: everything static and immediately visible ───────────── */
+@media (prefers-reduced-motion: reduce) {
+  .cine-ambient,
+  .site-header::after,
+  .hero-logo-frame::after,
+  .button::before {
+    display: none;
+  }
+
+  .hero-launch,
+  .flyer-link,
+  .media-frame img {
+    translate: none !important;
+    opacity: 1 !important;
+    scale: 1 !important;
+  }
+
+  .cine-ready .section:not(:first-of-type)::before {
+    transform: none;
+  }
+
+  .reveal-enabled .section-heading.reveal-pending > * {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}
