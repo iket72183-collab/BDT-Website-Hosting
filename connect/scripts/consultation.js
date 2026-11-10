@@ -41,9 +41,21 @@ if (!motionPreference.matches && typeof IntersectionObserver !== 'undefined') {
   const revealObserver = new IntersectionObserver(entries => {
     for (const entry of entries) {
       if (!entry.isIntersecting) continue;
-      if (!motionPreference.matches) entry.target.classList.add('arriving');
+      // Animate only what was held back; content already on screen stays put.
+      const wasHeld = entry.target.classList.contains('pre-arrive');
+      entry.target.classList.remove('pre-arrive');
+      if (wasHeld && !motionPreference.matches) entry.target.classList.add('arriving');
       revealObserver.unobserve(entry.target);
     }
   }, { threshold: 0.12 });
-  document.querySelectorAll('.section-head, .services .card, .workflow-card, .process-list > li, .faq-list details, .contact-panel > div').forEach(element => revealObserver.observe(element));
+  const revealTargets = document.querySelectorAll('.section-head, .services .card, .workflow-card, .process-list > li, .faq-list details, .contact-panel > div, .inquiry-form');
+  revealTargets.forEach(element => {
+    // Hold back only what is still below the fold, so nothing visible ever blinks out.
+    if (element.getBoundingClientRect().top > window.innerHeight) element.classList.add('pre-arrive');
+    revealObserver.observe(element);
+  });
+  // If the visitor turns motion off mid-visit, show everything immediately.
+  motionPreference.addEventListener('change', () => {
+    if (motionPreference.matches) revealTargets.forEach(element => element.classList.remove('pre-arrive'));
+  });
 }
