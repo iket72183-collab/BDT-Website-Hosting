@@ -1,0 +1,968 @@
+/*
+ * BDT Talent Group — polish layer.
+ *
+ * Loaded after site.css (and cinematic.css where present). It changes no
+ * content, colors, or images: only type scale, spacing, navigation layout,
+ * tap targets, and motion timing. Written mobile-first: base rules size for a
+ * phone, min-width queries add room for larger screens.
+ * Removing this file and polish.js restores the previous presentation.
+ */
+
+:root {
+  --muted: rgba(240, 238, 245, 0.78);
+  --soft: rgba(240, 238, 245, 0.62);
+  --polish-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --radius: 14px;
+  --radius-inner: 10px;
+  --gutter: 20px;
+  --header-h: 64px;
+  --cine-header-h: 64px;
+}
+
+@media (min-width: 981px) {
+  :root {
+    --gutter: 28px;
+    --header-h: 72px;
+    --cine-header-h: 72px;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 14px);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: rgba(201, 168, 76, 0.14);
+}
+
+/* ── Layout rhythm ───────────────────────────────────────────────────────── */
+.nav-shell,
+.section,
+.legal-page {
+  width: calc(100% - (var(--gutter) * 2));
+}
+
+.nav-shell {
+  min-height: var(--header-h);
+  gap: 16px;
+}
+
+.section {
+  padding: clamp(52px, 9vw, 104px) 0;
+  scroll-margin-top: calc(var(--header-h) + 14px);
+}
+
+.hero {
+  padding-top: clamp(24px, 5vw, 44px);
+  padding-bottom: clamp(44px, 8vw, 96px);
+}
+
+.section-heading {
+  margin-bottom: clamp(22px, 4vw, 40px);
+}
+
+.service-grid,
+.product-grid {
+  gap: clamp(16px, 2.4vw, 24px);
+}
+
+/* ── Typography ──────────────────────────────────────────────────────────── */
+.hero-launch .hero-mission {
+  width: 100%;
+  font-size: clamp(2.2rem, 1.35rem + 4.3vw, 4.35rem);
+  line-height: 1.08;
+  letter-spacing: 0.012em;
+  text-wrap: balance;
+}
+
+@media (min-width: 981px) {
+  .hero-launch .hero-mission {
+    letter-spacing: 0.03em;
+  }
+}
+
+.section-heading h1,
+.section-heading h2,
+.section-card h1,
+.section-card h2,
+.promo-copy h1,
+.promo-copy h2,
+.contact-grid h1,
+.contact-grid h2,
+.legal-page h1 {
+  font-size: clamp(1.8rem, 1.3rem + 2.3vw, 2.6rem);
+  line-height: 1.14;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+
+.promo-copy h2 + .feature-list,
+.promo-copy h1 ~ h2 {
+  margin-top: 22px;
+}
+
+.promo-copy h1 ~ h2 {
+  font-size: 1.4rem;
+}
+
+.service-card h3,
+.product-card h3 {
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+.service-card > h3:first-child {
+  margin-top: 0;
+}
+
+.section-card p,
+.section-heading p,
+.promo-copy p,
+.contact-grid p,
+.service-card p,
+.product-card p,
+.feature-list li {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.section-heading p:not(.eyebrow),
+.promo-copy p:not(.eyebrow) {
+  max-width: 62ch;
+}
+
+.eyebrow,
+.section-card p.eyebrow,
+.section-heading p.eyebrow,
+.promo-copy p.eyebrow,
+.contact-grid p.eyebrow,
+.product-card p.eyebrow {
+  margin: 0 0 12px;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  letter-spacing: 0.22em;
+}
+
+.product-card p.eyebrow {
+  margin-top: 4px;
+  color: var(--gold);
+}
+
+.hero-tagline {
+  width: 100%;
+  margin-top: 16px;
+  font-size: clamp(0.8125rem, 0.74rem + 0.3vw, 0.96rem);
+  letter-spacing: 0.1em;
+  line-height: 1.7;
+  text-wrap: balance;
+}
+
+.hero-lede {
+  width: 100%;
+  margin-top: 16px;
+  font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.14rem);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.page-updated,
+.section-heading p.page-updated,
+.section-card p.page-updated,
+.promo-copy p.page-updated,
+.contact-grid p.page-updated {
+  color: var(--soft);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* The closing note under "Find your fit" was unstyled body text. */
+#service-fit > p {
+  margin: 22px 0 0;
+  color: var(--soft);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.wide-image {
+  margin-top: clamp(16px, 2.4vw, 24px);
+}
+
+.wide-image figcaption {
+  margin-top: 0;
+  padding: 16px 10px 10px;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.legal-page {
+  padding: clamp(44px, 8vw, 84px) 0;
+}
+
+.legal-page p,
+.legal-page li {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.legal-page h2 {
+  margin-top: 40px;
+  line-height: 1.25;
+}
+
+.legal-line {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  line-height: 1.7;
+  color: rgba(240, 238, 245, 0.5) !important;
+}
+
+/* ── Cards: softer corners, consistent padding, calmer touch feedback ───── */
+.section-card,
+.service-card,
+.product-card,
+.promo-grid,
+.wide-image,
+.contact-form {
+  border-radius: var(--radius);
+}
+
+.section-card::after,
+.service-card::after,
+.product-card::after,
+.promo-grid::after,
+.wide-image::after,
+.contact-form::after {
+  border-radius: calc(var(--radius) - 1px);
+}
+
+.section-card,
+.promo-grid {
+  padding: clamp(22px, 3.4vw, 40px);
+}
+
+.service-card,
+.product-card {
+  padding: clamp(20px, 2.6vw, 28px);
+}
+
+.contact-form {
+  gap: 18px;
+  padding: clamp(20px, 2.8vw, 30px);
+}
+
+.media-frame,
+.hero-logo-frame,
+.portrait-frame img,
+.wide-image img,
+.flyer-link img,
+.product-card .product-banner,
+.service-card .service-banner,
+.product-banner-link {
+  border-radius: var(--radius-inner);
+}
+
+.hero-logo-frame {
+  margin-bottom: clamp(22px, 3vw, 32px);
+}
+
+/* Product cards read left-aligned on every screen, like the rest of the page. */
+.product-card,
+.product-card .eyebrow,
+.product-card h3,
+.product-card p {
+  align-items: stretch;
+  text-align: left;
+}
+
+.product-card .text-link {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* The filter forced a full repaint of each large card on hover / tap. */
+.section-card:hover,
+.section-card:active,
+.section-card.is-lit,
+.service-card:hover,
+.service-card:active,
+.service-card.is-lit,
+.product-card:hover,
+.product-card:active,
+.product-card.is-lit,
+.promo-grid:hover,
+.promo-grid:active,
+.promo-grid.is-lit,
+.wide-image:hover,
+.wide-image:active,
+.wide-image.is-lit,
+.contact-form:hover,
+.contact-form:active,
+.contact-form.is-lit {
+  filter: none;
+}
+
+.section-card:hover::before,
+.section-card.is-lit::before,
+.service-card:hover::before,
+.service-card.is-lit::before,
+.product-card:hover::before,
+.product-card.is-lit::before,
+.promo-grid:hover::before,
+.promo-grid.is-lit::before,
+.wide-image:hover::before,
+.wide-image.is-lit::before,
+.contact-form:hover::before,
+.contact-form.is-lit::before {
+  filter: none;
+}
+
+/* Touch screens keep the gold glow but cards no longer jump under a thumb. */
+@media (hover: none) {
+  .section-card,
+  .service-card,
+  .product-card,
+  .promo-grid,
+  .wide-image,
+  .contact-form,
+  .section-card:hover,
+  .service-card:hover,
+  .product-card:hover,
+  .promo-grid:hover,
+  .wide-image:hover,
+  .contact-form:hover,
+  .section-card:active,
+  .service-card:active,
+  .product-card:active,
+  .promo-grid:active,
+  .wide-image:active,
+  .contact-form:active,
+  .section-card.is-lit,
+  .service-card.is-lit,
+  .product-card.is-lit,
+  .promo-grid.is-lit,
+  .wide-image.is-lit,
+  .contact-form.is-lit {
+    --hover-y: 0px;
+  }
+
+  .button:hover,
+  .button:active,
+  .button.is-lit {
+    transform: none;
+  }
+
+  .button:active {
+    transform: scale(0.985);
+  }
+}
+
+/* ── Buttons, links, tap targets ─────────────────────────────────────────── */
+.button {
+  min-height: 50px;
+  padding: 13px 22px;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.hero-actions {
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.text-link {
+  align-items: center;
+  min-height: 44px;
+  margin-top: auto;
+  padding-top: 14px;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+}
+
+.text-link::before {
+  bottom: 6px;
+}
+
+.feature-list {
+  gap: 12px;
+}
+
+.feature-list li::before {
+  top: 0.62em;
+}
+
+/* ── Forms ───────────────────────────────────────────────────────────────── */
+.contact-form span {
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  min-height: 52px;
+  border-radius: var(--radius-inner);
+  padding: 14px 16px;
+  line-height: 1.4;
+}
+
+.contact-form textarea {
+  height: 148px;
+  min-height: 148px;
+  line-height: 1.6;
+}
+
+/* The 1px focus lift made text shimmer while typing. */
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  transform: none;
+}
+
+.form-actions {
+  margin-top: 4px;
+}
+
+.support-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 44px;
+  font-size: 1.0625rem;
+  list-style: none;
+}
+
+.support-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.support-faq summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  color: var(--gold);
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 260ms var(--polish-ease);
+}
+
+.support-faq details[open] summary::after {
+  transform: rotate(45deg);
+}
+
+.support-faq details {
+  padding: 10px 0;
+}
+
+.support-faq details p {
+  margin: 4px 0 10px;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────── */
+.brand-mark {
+  min-height: 44px;
+}
+
+.brand-mark small {
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+}
+
+.menu-toggle {
+  min-height: 44px;
+  min-width: 96px;
+  justify-content: center;
+  padding: 10px 16px;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  transition: border-color 220ms ease, background 220ms ease;
+}
+
+.menu-toggle span {
+  transition: transform 260ms var(--polish-ease), opacity 200ms ease;
+}
+
+.menu-toggle[aria-expanded="true"] {
+  border-color: rgba(201, 168, 76, 0.6);
+  background: rgba(201, 168, 76, 0.1);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateX(11px);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateX(-11px);
+}
+
+.social-toggle {
+  display: none;
+}
+
+/* Phone and tablet: a full-width sheet with large rows and an icon grid. */
+@media (max-width: 980px) {
+  .nav-links {
+    top: 100%;
+    width: 100vw;
+    max-width: none;
+    max-height: calc(100vh - var(--header-h));
+    max-height: calc(100dvh - var(--header-h));
+    padding: 4px var(--gutter) 24px;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    border-radius: 0 0 18px 18px;
+    background: rgba(9, 8, 10, 0.985);
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-links > a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 56px;
+    padding: 0 2px;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 0;
+    color: var(--text);
+    font-size: 0.875rem;
+    letter-spacing: 0.16em;
+  }
+
+  .nav-links > a::after {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border: 1px solid var(--gold);
+    opacity: 0.55;
+    transform: rotate(45deg);
+    transition: opacity 200ms ease, background 200ms ease;
+  }
+
+  .nav-links > a:hover,
+  .nav-links > a:focus-visible,
+  .nav-links > a:active,
+  .nav-links > a.is-lit,
+  .nav-links > a.is-active,
+  .nav-links > a[aria-current] {
+    border-color: rgba(255, 255, 255, 0.07);
+    background: transparent;
+    box-shadow: none;
+    color: var(--gold-light);
+    text-shadow: none;
+  }
+
+  .nav-links > a.is-active::after,
+  .nav-links > a[aria-current]::after {
+    opacity: 1;
+    background: var(--gold);
+  }
+
+  .menu-socials {
+    grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+    gap: 4px;
+    margin-top: 0;
+    padding-top: 18px;
+    border-top: 0;
+  }
+
+  .menu-social-title {
+    justify-self: start;
+    margin: 0 0 8px 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-align: left;
+  }
+
+  .menu-socials a {
+    min-height: 44px;
+    padding: 0;
+    border-radius: 12px;
+  }
+
+  /* Icons only; each link keeps its aria-label for screen readers. */
+  .menu-socials a span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .social-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Dimmed page behind the open sheet (class set by polish.js). */
+  .menu-open .site-header::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.62);
+    animation: polish-fade 220ms ease both;
+  }
+
+  html.menu-open,
+  html.menu-open body {
+    overflow: hidden;
+  }
+
+  /* An odd last card no longer strands itself in a half-empty row. */
+  .service-grid > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .service-grid > :last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .hero-launch > .hero-actions {
+    width: 100%;
+  }
+
+  .button {
+    min-height: 50px;
+  }
+
+  .brand-mark img {
+    width: 50px;
+    height: 36px;
+  }
+
+  .brand-mark small {
+    font-size: 0.66rem;
+  }
+}
+
+@keyframes polish-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Desktop: quiet text links, and the 14 social icons tuck behind "Follow". */
+@media (min-width: 981px) {
+  .nav-shell {
+    position: relative;
+  }
+
+  .nav-links {
+    gap: 4px;
+  }
+
+  .nav-links > a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 8px;
+    font-size: 0.78rem;
+    letter-spacing: 0.13em;
+  }
+
+  .nav-links > a::after {
+    content: "";
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 8px;
+    height: 1px;
+    background: var(--gold-light);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 320ms var(--polish-ease);
+  }
+
+  .nav-links > a:hover,
+  .nav-links > a:focus-visible,
+  .nav-links > a:active,
+  .nav-links > a.is-lit,
+  .nav-links > a.is-active,
+  .nav-links > a[aria-current] {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    color: var(--gold-warm);
+    text-shadow: none;
+  }
+
+  .nav-links > a:hover::after,
+  .nav-links > a:focus-visible::after,
+  .nav-links > a.is-active::after,
+  .nav-links > a[aria-current]::after {
+    transform: scaleX(1);
+  }
+
+  .has-social-toggle .social-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    min-height: 40px;
+    margin-left: 10px;
+    padding: 0 16px;
+    border: 1px solid rgba(201, 168, 76, 0.42);
+    border-radius: 999px;
+    background: rgba(201, 168, 76, 0.07);
+    color: var(--gold-warm);
+    font: inherit;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 220ms ease, background 220ms ease;
+  }
+
+  .has-social-toggle .social-toggle::after {
+    content: "";
+    width: 6px;
+    height: 6px;
+    margin-top: -3px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: rotate(45deg);
+    transition: transform 260ms var(--polish-ease);
+  }
+
+  .has-social-toggle .social-toggle:hover,
+  .has-social-toggle .social-toggle[aria-expanded="true"] {
+    border-color: rgba(241, 215, 143, 0.75);
+    background: rgba(201, 168, 76, 0.14);
+  }
+
+  .has-social-toggle .social-toggle[aria-expanded="true"]::after {
+    margin-top: 3px;
+    transform: rotate(-135deg);
+  }
+
+  .has-social-toggle .menu-socials {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 348px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 0;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: rgba(10, 9, 11, 0.985);
+    box-shadow: var(--shadow);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition:
+      opacity 200ms ease,
+      transform 260ms var(--polish-ease),
+      visibility 0s linear 260ms;
+  }
+
+  .has-social-toggle .menu-socials.is-open {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  .has-social-toggle .menu-social-title {
+    display: block;
+    grid-column: 1 / -1;
+    margin: 2px 0 8px 10px;
+    color: var(--gold);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .has-social-toggle .menu-socials a {
+    width: auto;
+    min-height: 42px;
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 0 10px;
+    border-color: transparent;
+    border-radius: 9px;
+    background: transparent;
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+  }
+
+  .has-social-toggle .menu-socials a:hover,
+  .has-social-toggle .menu-socials a:focus-visible {
+    border-color: rgba(201, 168, 76, 0.34);
+    background: rgba(201, 168, 76, 0.08);
+    box-shadow: none;
+    transform: none;
+  }
+
+  .has-social-toggle .menu-socials a span {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: nowrap;
+  }
+
+  .has-social-toggle .social-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.site-footer {
+  padding: 40px var(--gutter) calc(36px + env(safe-area-inset-bottom, 0px));
+}
+
+.footer-links {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2px 4px;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 0.75rem;
+  letter-spacing: 0.13em;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible,
+.footer-links a:active,
+.footer-links a.is-lit {
+  box-shadow: none;
+  text-shadow: none;
+}
+
+/* ── Motion: shorter, quieter, same character ────────────────────────────── */
+.reveal,
+.reveal-card {
+  --reveal-duration: 680ms;
+}
+
+.reveal-enabled .reveal.reveal-pending,
+.reveal-enabled .reveal-card.reveal-pending {
+  --reveal-y: 18px;
+}
+
+.reveal-enabled .section-heading.reveal.reveal-pending {
+  --reveal-y: 0px;
+}
+
+.reveal-enabled .section-heading.reveal-pending.is-visible > * {
+  transition:
+    opacity 600ms var(--polish-ease),
+    transform 720ms var(--polish-ease),
+    clip-path 720ms var(--polish-ease);
+}
+
+.reveal-enabled .section-heading.reveal-pending.is-visible > h2 {
+  transition-delay: 60ms;
+}
+
+.reveal-enabled .section-heading.reveal-pending.is-visible > p:not(.eyebrow) {
+  transition-delay: 130ms;
+}
+
+.media-frame img,
+.portrait-frame .media-frame img {
+  transition-duration: 1100ms;
+}
+
+.cine-ready .section:not(:first-of-type)::before {
+  transition-duration: 900ms;
+}
+
+/* Hero: everything is on screen in about 1.2s instead of 2s. */
+.hero-logo-frame {
+  animation-duration: 900ms;
+  animation-delay: 0ms;
+}
+
+.hero-logo-frame::after {
+  animation-delay: 850ms;
+  animation-duration: 1300ms;
+}
+
+.hero-launch > .eyebrow {
+  animation-duration: 700ms;
+  animation-delay: 160ms;
+}
+
+.hero-line {
+  animation-duration: 800ms;
+  animation-delay: 220ms;
+}
+
+.hero-mission-accent {
+  animation-duration: 800ms;
+  animation-delay: 300ms;
+}
+
+.hero-tagline {
+  animation-duration: 700ms;
+  animation-delay: 400ms;
+}
+
+.hero-lede {
+  animation-duration: 700ms;
+  animation-delay: 460ms;
+}
+
+.hero-launch > .page-updated {
+  animation-duration: 700ms;
+  animation-delay: 500ms;
+}
+
+.hero-launch > .hero-actions {
+  animation-duration: 700ms;
+  animation-delay: 540ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu-open .site-header::before {
+    animation: none;
+  }
+
+  .has-social-toggle .menu-socials {
+    transform: none;
+  }
+
+  .button:active {
+    transform: none;
+  }
+}
