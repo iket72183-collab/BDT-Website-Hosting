@@ -621,11 +621,6 @@ body {
     animation: polish-fade 220ms ease both;
   }
 
-  html.menu-open,
-  html.menu-open body {
-    overflow: hidden;
-  }
-
   /* An odd last card no longer strands itself in a half-empty row. */
   .service-grid > :last-child:nth-child(odd) {
     grid-column: 1 / -1;

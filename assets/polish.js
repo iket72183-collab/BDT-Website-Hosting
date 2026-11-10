@@ -1,8 +1,8 @@
 /*
  * BDT Talent Group — navigation polish (progressive enhancement).
  *
- *  - Mirrors the mobile menu's open state onto <html> (page dim + scroll
- *    lock), swaps the toggle label, and closes the menu on an outside tap.
+ *  - Mirrors the mobile menu's open state onto <html> (page dim),
+ *    swaps the toggle label, and closes the menu on an outside tap.
  *  - On desktop, tucks the social links behind a "Follow" button.
  * site.js still owns opening/closing the menu; if this file fails to load the
  * site behaves exactly as before.
