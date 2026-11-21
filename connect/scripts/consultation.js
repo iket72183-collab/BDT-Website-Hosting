@@ -48,7 +48,7 @@ if (!motionPreference.matches && typeof IntersectionObserver !== 'undefined') {
       revealObserver.unobserve(entry.target);
     }
   }, { threshold: 0.12 });
-  const revealTargets = document.querySelectorAll('.section-head, .services .card, .workflow-card, .process-list > li, .faq-list details, .contact-panel > div, .inquiry-form');
+  const revealTargets = document.querySelectorAll('.section-head, .services .card, .workflow-card, .process-list > li, .faq-list details');
   revealTargets.forEach(element => {
     // Hold back only what is still below the fold, so nothing visible ever blinks out.
     if (element.getBoundingClientRect().top > window.innerHeight) element.classList.add('pre-arrive');

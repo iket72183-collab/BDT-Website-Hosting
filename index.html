@@ -46,7 +46,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./assets/site.css?v=20261019-aeo" />
   <link rel="stylesheet" href="./assets/cinematic.css?v=20261024" />
-  <link rel="stylesheet" href="./assets/polish.css?v=20261111-fightbrief" />
+  <link rel="stylesheet" href="./assets/polish.css?v=20261121-contact" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -438,52 +438,31 @@
 
     <section class="section contact-section" id="contact" aria-labelledby="contact-title">
       <div class="section-card contact-grid">
-        <div class="reveal">
+        <div>
           <p class="eyebrow">Contact</p>
           <h2 id="contact-title">Start the conversation.</h2>
-          <p>
-            For talent inquiries, app partnerships, brand collaborations, business development, or media opportunities, send a concise note through the contact form.
-          </p>
+          <p class="eyebrow">Call BDT</p>
+          <a class="button button-secondary" href="tel:+13465252961">+1 (346) 525-2961</a>
+          <p>Answered by Melody, our AI assistant.</p>
+          <a href="./contact.html">Full inquiry form</a>
         </div>
 
-        <form class="contact-form reveal-card" action="https://formspree.io/f/mojykkbw" method="POST">
+        <form class="contact-form" aria-label="Quick message" action="https://formspree.io/f/mojykkbw" method="POST">
           <input type="hidden" name="_subject" value="BDT Talent Group website inquiry" />
+          <input type="hidden" name="inquiryType" value="general-business" />
           <label class="hidden-field" aria-hidden="true">
             Company Name
             <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" />
           </label>
           <label>
-            <span>Full Name</span>
-            <input type="text" name="fullName" autocomplete="name" placeholder="Your full name" maxlength="120" required />
-          </label>
-          <label>
-            <span>Email Address</span>
+            <span>Reply email</span>
             <input type="email" name="email" autocomplete="email" placeholder="name@example.com" maxlength="254" required />
           </label>
           <label>
-            <span>Inquiry Type</span>
-            <select name="inquiryType" autocomplete="off" required>
-              <option value="" selected disabled>Select inquiry type</option>
-              <option value="bdt-enterprises">BDT Enterprises</option>
-              <option value="bdt-productions">BDT Productions</option>
-              <option value="bdt-tech">BDT Tech</option>
-              <option value="talent-strategy">Talent Strategy</option>
-              <option value="creator-partnerships">Creator Partnerships</option>
-              <option value="digital-product-development">Digital Product Development</option>
-              <option value="ai-powered-operations">AI-Powered Operations</option>
-              <option value="brand-growth">Brand Growth</option>
-              <option value="media-press">Media / Press</option>
-              <option value="general-business">General Business</option>
-            </select>
+            <span>Message</span>
+            <textarea name="message" rows="3" maxlength="5000" required></textarea>
           </label>
-          <label>
-            <span>Inquiry</span>
-            <textarea name="message" rows="5" placeholder="Tell us about your project, talent inquiry, or partnership opportunity." maxlength="5000" required></textarea>
-          </label>
-          <div class="form-actions">
-            <button class="button button-primary" type="submit">Send Message</button>
-            <button class="button button-secondary" type="reset">Clear Form</button>
-          </div>
+          <button class="button button-primary" type="submit">Send message</button>
         </form>
       </div>
     </section>

@@ -406,6 +406,29 @@ body {
   top: 0.62em;
 }
 
+/* Keep contact copy and field taps on static surfaces on touch screens. */
+@media (hover: none) {
+  .contact-section :is(.contact-grid, .contact-form) {
+    transform: none;
+    transition: none;
+    box-shadow: var(--shadow);
+  }
+
+  .contact-section :is(.contact-grid, .contact-form)::before,
+  .contact-section :is(.contact-grid, .contact-form)::after {
+    content: none;
+  }
+}
+
+#contact .contact-grid h2 + .eyebrow {
+  margin-top: 18px;
+}
+
+#contact .contact-form textarea {
+  height: auto;
+  min-height: 5rem;
+}
+
 /* ── Forms ───────────────────────────────────────────────────────────────── */
 .contact-form span {
   font-size: 0.75rem;
