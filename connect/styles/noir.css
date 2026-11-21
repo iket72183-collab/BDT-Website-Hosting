@@ -857,7 +857,8 @@ details[open] > summary .icon-vertical { opacity: 0; }
 }
 .contact-panel > div { position: sticky; top: 128px; align-self: start; }
 .contact-panel h2 { margin: 20px 0 22px; }
-.contact-panel > div > p:last-child { max-width: 26rem; }
+.contact-panel > div > p:not(.eyebrow) { max-width: 26rem; }
+.call-option { display: grid; justify-items: start; gap: 12px; margin-top: 26px; }
 .inquiry-form { position: relative; display: grid; gap: 22px; min-width: 0; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 label {
