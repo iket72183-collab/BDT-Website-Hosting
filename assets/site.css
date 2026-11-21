@@ -1632,3 +1632,33 @@ textarea:focus-visible {
   line-height: 1.6;
   margin: 12px 0 18px;
 }
+
+/* ── Find your fit: larger, easier-to-read type on phones ── */
+@media (max-width: 640px) {
+  #service-fit .section-heading h2 {
+    font-size: 2.2rem;
+  }
+
+  #service-fit .section-heading p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+  }
+
+  #service-fit .service-card .eyebrow {
+    font-size: 1rem;
+    letter-spacing: 0.24em;
+  }
+
+  #service-fit .service-card h3 {
+    font-size: 1.72rem;
+  }
+
+  #service-fit .service-card p:not(.eyebrow) {
+    font-size: 1.15rem;
+    line-height: 1.6;
+  }
+
+  #service-fit .service-card .text-link {
+    font-size: 0.88rem;
+  }
+}
