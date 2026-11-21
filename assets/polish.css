@@ -186,7 +186,7 @@ body {
   line-height: 1.6;
 }
 
-/* The closing note under "Find your fit" was unstyled body text. */
+/* The closing note under the service-fit section was unstyled body text. */
 #service-fit > p {
   margin: 22px 0 0;
   color: var(--soft);
