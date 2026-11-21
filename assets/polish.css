@@ -186,7 +186,7 @@ body {
   line-height: 1.6;
 }
 
-/* The closing note under "Find your fit" was unstyled body text. */
+/* The closing note under the service-fit section was unstyled body text. */
 #service-fit > p {
   margin: 22px 0 0;
   color: var(--soft);
@@ -988,5 +988,87 @@ body {
 
   .button:active {
     transform: none;
+  }
+}
+
+/* ── Mobile type scale: larger, easier-to-read text on phones ── */
+@media (max-width: 640px) {
+  .section-heading h1,
+  .section-heading h2,
+  .section-card h1,
+  .section-card h2,
+  .promo-copy h1,
+  .promo-copy h2,
+  .contact-grid h1,
+  .contact-grid h2,
+  .legal-page h1 {
+    font-size: 2.2rem;
+  }
+
+  .promo-copy h1 ~ h2,
+  .legal-page h2,
+  .service-card h3,
+  .product-card h3 {
+    font-size: 1.72rem;
+  }
+
+  .section-card p,
+  .section-heading p,
+  .promo-copy p,
+  .contact-grid p,
+  .service-card p,
+  .product-card p,
+  .feature-list li,
+  .legal-page p,
+  .legal-page li,
+  .support-faq summary,
+  .hero-lede,
+  .wide-image figcaption {
+    font-size: 1.15rem;
+    line-height: 1.6;
+  }
+
+  .service-card p.eyebrow,
+  .product-card p.eyebrow {
+    font-size: 1rem;
+    letter-spacing: 0.24em;
+  }
+
+  .legal-page p.eyebrow {
+    font-size: 0.75rem;
+  }
+
+  .page-updated,
+  .section-heading p.page-updated,
+  .section-card p.page-updated,
+  .promo-copy p.page-updated,
+  .contact-grid p.page-updated {
+    font-size: 1rem;
+  }
+
+  .hero-tagline {
+    font-size: 0.9rem;
+  }
+
+  .button,
+  .text-link {
+    font-size: 0.88rem;
+  }
+
+  .availability-note,
+  .support-response-note {
+    font-size: 0.95rem !important;
+  }
+
+  .contact-form span {
+    font-size: 0.82rem;
+  }
+
+  .footer-links a {
+    font-size: 0.85rem;
+  }
+
+  .legal-line {
+    font-size: 0.8rem;
   }
 }
