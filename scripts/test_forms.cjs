@@ -80,3 +80,15 @@ test('all inquiry pages load helper before their adapters; endpoint unchanged', 
     assert.match(readFileSync(adapter,'utf8'),/window\.BDTForms\.attach/);
   }
 });
+
+test('homepage quick message uses the general business route and links to the full form', () => {
+  const html = readFileSync('index.html', 'utf8');
+  const section = html.match(/<section[^>]* id="contact"[^>]*>([\s\S]*?)<\/section>/);
+  assert.ok(section);
+  assert.match(section[1], /name="inquiryType" value="general-business"/);
+  assert.match(section[1], /name="email"/);
+  assert.match(section[1], /name="message"/);
+  assert.doesNotMatch(section[1], /name="fullName"|<select\b/);
+  assert.match(section[1], /href="\.\/contact\.html"/);
+  assert.match(section[1], /href="tel:\+13465252961"/);
+});
