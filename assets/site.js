@@ -1,282 +1,277 @@
-const year = document.getElementById("current-year");
-if (year) {
-  year.textContent = String(new Date().getFullYear());
-}
+/*
+ * BDT Talent Group — Unified Navigation, Motion & Inquiry Script
+ * Keeps mobile hamburger sheet, desktop Follow drawer ([hidden]-backed),
+ * active nav highlighting, subtle scroll-reveals, and Formspree AJAX intact.
+ */
+(() => {
+  "use strict";
 
-const toggle = document.querySelector(".menu-toggle");
-const menu = document.getElementById("primary-menu");
+  const root = document.documentElement;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const desktopQuery = window.matchMedia("(min-width: 961px)");
 
-if (toggle && menu) {
-  toggle.addEventListener("click", () => {
-    const isOpen = menu.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", String(isOpen));
-  });
+  const onMediaChange = (mq, fn) => {
+    if (typeof mq.addEventListener === "function") mq.addEventListener("change", fn);
+    else mq.addListener(fn);
+  };
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && toggle.getAttribute("aria-expanded") === "true") {
-      menu.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.focus();
-    }
-  });
+  // Current year
+  const yearEl = document.getElementById("current-year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  menu.addEventListener("click", (event) => {
-    const target = event.target;
-    if (target instanceof HTMLAnchorElement) {
-      menu.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    }
-  });
-}
+  // Header scroll state
+  const header = document.querySelector(".site-header");
+  if (header) {
+    let scrollTick = 0;
+    const syncHeader = () => {
+      scrollTick = 0;
+      header.classList.toggle("is-scrolled", window.scrollY > 12);
+    };
+    const queueHeader = () => {
+      if (!scrollTick) scrollTick = window.requestAnimationFrame(syncHeader);
+    };
+    window.addEventListener("scroll", queueHeader, { passive: true });
+    syncHeader();
+  }
 
-const lightTargets = document.querySelectorAll(
-  ".section-card, .service-card, .product-card, .promo-grid, .wide-image, .contact-form, .nav-links a, .button"
-);
+  // Mobile hamburger menu
+  const menuToggle = document.querySelector(".menu-toggle");
+  const menu = document.getElementById("primary-menu");
+  const menuLabel = menuToggle?.querySelector(".menu-toggle-label");
 
-lightTargets.forEach((target) => {
-  target.addEventListener("pointerdown", () => {
-    target.classList.add("is-lit");
-    window.setTimeout(() => target.classList.remove("is-lit"), 650);
-  });
-});
+  if (menuToggle && menu) {
+    const setMenuOpen = (open) => {
+      menu.classList.toggle("is-open", open);
+      root.classList.toggle("menu-open", open);
+      menuToggle.setAttribute("aria-expanded", String(open));
+      if (menuLabel) menuLabel.textContent = open ? "Close" : "Menu";
+    };
 
-const navSectionLinks = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+    menuToggle.addEventListener("click", () => {
+      setMenuOpen(!menu.classList.contains("is-open"));
+    });
 
-const setActiveNavLink = (hash) => {
-  navSectionLinks.forEach((link) => {
-    const isActive = link.getAttribute("href") === hash;
-    link.classList.toggle("is-active", isActive);
-
-    if (isActive) {
-      link.setAttribute("aria-current", "location");
-    } else {
-      link.removeAttribute("aria-current");
-    }
-  });
-};
-
-navSectionLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    const hash = link.getAttribute("href");
-    if (hash) {
-      setActiveNavLink(hash);
-    }
-  });
-});
-
-if (window.location.hash) {
-  setActiveNavLink(window.location.hash);
-}
-
-const navSections = navSectionLinks
-  .map((link) => {
-    const hash = link.getAttribute("href");
-    return hash ? document.querySelector(hash) : null;
-  })
-  .filter(Boolean);
-
-if ("IntersectionObserver" in window && navSections.length) {
-  const navObserver = new IntersectionObserver(
-    (entries) => {
-      const visibleEntry = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
-      if (visibleEntry) {
-        setActiveNavLink(`#${visibleEntry.target.id}`);
+    menu.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest("a")) {
+        setMenuOpen(false);
       }
-    },
-    { rootMargin: "-25% 0px -55% 0px", threshold: [0.12, 0.32, 0.55] }
-  );
+    });
 
-  navSections.forEach((section) => navObserver.observe(section));
-}
+    document.addEventListener("pointerdown", (event) => {
+      if (!menu.classList.contains("is-open")) return;
+      const target = event.target;
+      if (target instanceof Node && (menu.contains(target) || menuToggle.contains(target))) return;
+      setMenuOpen(false);
+    });
 
-// ── Contact form: AJAX submission via Formspree ──────────────────────────────
-const contactForm = document.querySelector(".contact-form");
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menu.classList.contains("is-open")) {
+        setMenuOpen(false);
+        menuToggle.focus();
+      }
+    });
 
-function showToast(message, isError = false) {
-  const existing = document.getElementById("bdt-toast");
-  if (existing) existing.remove();
+    onMediaChange(desktopQuery, (e) => {
+      if (e.matches) setMenuOpen(false);
+    });
+  }
 
-  const toast = document.createElement("div");
-  toast.id = "bdt-toast";
-  toast.setAttribute("role", "status");
-  toast.setAttribute("aria-live", "polite");
-  toast.textContent = message;
+  // Desktop Follow social dropdown ([hidden]-backed — immune to ghosting)
+  const socialToggle = document.querySelector(".social-toggle");
+  const socialMenu = document.getElementById("social-links");
 
-  Object.assign(toast.style, {
-    position: "fixed",
-    bottom: "28px",
-    left: "50%",
-    transform: "translateX(-50%) translateY(16px)",
-    zIndex: "9999",
-    padding: "14px 24px",
-    borderRadius: "18px",
-    border: isError
-      ? "1px solid rgba(255, 100, 100, 0.5)"
-      : "1px solid rgba(201, 168, 76, 0.55)",
-    background: isError
-      ? "rgba(80, 10, 10, 0.92)"
-      : "rgba(12, 10, 6, 0.92)",
-    color: isError ? "#ffaaaa" : "#f5e9bf",
-    fontFamily: "DM Sans, Arial, sans-serif",
-    fontSize: "0.82rem",
-    fontWeight: "700",
-    letterSpacing: "0.12em",
-    textTransform: "uppercase",
-    boxShadow: isError
-      ? "0 8px 32px rgba(0,0,0,0.5), 0 0 18px rgba(180,30,30,0.18)"
-      : "0 8px 32px rgba(0,0,0,0.5), 0 0 18px rgba(201,168,76,0.18)",
-    backdropFilter: "blur(12px)",
-    opacity: "0",
-    transition: "opacity 280ms ease, transform 280ms ease",
-    width: "max-content",
-    maxWidth: "calc(100vw - 48px)",
-    whiteSpace: "normal",
-    overflowWrap: "anywhere",
-    boxSizing: "border-box",
-    pointerEvents: "none",
-  });
+  if (socialToggle && socialMenu) {
+    const setSocialOpen = (open) => {
+      socialMenu.hidden = !open;
+      socialToggle.setAttribute("aria-expanded", String(open));
+    };
 
-  document.body.appendChild(toast);
+    socialToggle.addEventListener("click", () => {
+      setSocialOpen(socialMenu.hidden);
+    });
 
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      toast.style.opacity = "1";
-      toast.style.transform = "translateX(-50%) translateY(0)";
+    document.addEventListener("pointerdown", (event) => {
+      if (socialMenu.hidden) return;
+      const target = event.target;
+      if (target instanceof Node && (socialMenu.contains(target) || socialToggle.contains(target))) return;
+      setSocialOpen(false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !socialMenu.hidden) {
+        setSocialOpen(false);
+        socialToggle.focus();
+      }
+    });
+
+    socialMenu.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest("a")) {
+        setSocialOpen(false);
+      }
+    });
+
+    onMediaChange(desktopQuery, () => setSocialOpen(false));
+  }
+
+  // Active nav section highlight on homepage
+  const navSectionLinks = Array.from(document.querySelectorAll('.nav-links > a[href^="#"]'));
+  const setActiveNav = (hash) => {
+    navSectionLinks.forEach((link) => {
+      const active = link.getAttribute("href") === hash;
+      link.classList.toggle("is-active", active);
+      if (active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+  };
+
+  navSectionLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const hash = link.getAttribute("href");
+      if (hash) setActiveNav(hash);
     });
   });
 
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    toast.style.transform = "translateX(-50%) translateY(8px)";
-    setTimeout(() => toast.remove(), 320);
-  }, isError ? 5000 : 3500);
-}
+  if (window.location.hash) setActiveNav(window.location.hash);
 
-if (contactForm) {
-  window.BDTForms.attach(contactForm, {
-    report: showToast,
-    sending: "Sending your message…",
-    success: "Message sent — we'll be in touch.",
-  });
-}
-// ─────────────────────────────────────────────────────────────────────────────
+  const navSections = navSectionLinks
+    .map((link) => document.querySelector(link.getAttribute("href")))
+    .filter(Boolean);
 
-document.querySelectorAll(".legal-page > h2, .legal-page > h2 + p").forEach((item) => {
-  item.classList.add("reveal");
-});
-
-const revealItems = Array.from(document.querySelectorAll(".reveal, .reveal-card"));
-const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-let revealObserver = null;
-
-document.querySelectorAll(".service-grid, .product-grid").forEach((group) => {
-  group.querySelectorAll(".reveal, .reveal-card").forEach((item, index) => {
-    // Cinematic stagger: cards cascade in sequence; capped so late cards never feel slow.
-    const step = window.innerWidth <= 640 ? 60 : 95;
-    const maximum = window.innerWidth <= 640 ? 120 : 285;
-    item.style.setProperty("--reveal-delay", `${Math.min(index * step, maximum)}ms`);
-  });
-});
-
-const showAllRevealItems = () => {
-  revealObserver?.disconnect();
-  document.documentElement.classList.remove("reveal-enabled");
-  revealItems.forEach((item) => {
-    item.classList.remove("reveal-pending");
-    item.classList.add("is-visible");
-  });
-};
-
-const enableRevealAnimations = () => {
-  if (!revealItems.length || motionPreference.matches || !("IntersectionObserver" in window)) {
-    showAllRevealItems();
-    return;
+  if ("IntersectionObserver" in window && navSections.length) {
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveNav(`#${visible.target.id}`);
+      },
+      { rootMargin: "-22% 0px -58% 0px", threshold: [0.1, 0.35] }
+    );
+    navSections.forEach((section) => navObserver.observe(section));
   }
 
-  let scrollFrame = 0;
+  // Subtle progressive scroll-reveal animations
+  const revealItems = Array.from(document.querySelectorAll(".reveal"));
+  let revealObserver = null;
 
-  const revealItem = (item) => {
-    if (item.classList.contains("is-visible")) {
-      return;
-    }
-
-    item.classList.add("is-visible");
-    revealObserver?.unobserve(item);
-  };
-
-  const hasAlreadyReached = (item) => {
-    const rect = item.getBoundingClientRect();
-    return rect.bottom < 0 || rect.top < window.innerHeight * 0.88;
-  };
-
-  const pendingItems = [];
-  revealItems.forEach((item) => {
-    if (hasAlreadyReached(item)) {
+  const showAllReveals = () => {
+    revealObserver?.disconnect();
+    root.classList.remove("reveal-enabled");
+    revealItems.forEach((item) => {
+      item.classList.remove("reveal-pending");
       item.classList.add("is-visible");
-    } else {
-      item.classList.add("reveal-pending");
-      pendingItems.push(item);
-    }
-  });
+    });
+  };
 
-  const revealReachedItems = () => {
-    scrollFrame = 0;
-
+  if (revealItems.length && !reduceMotion.matches && "IntersectionObserver" in window) {
     try {
-      pendingItems.forEach((item) => {
-        if (item.classList.contains("is-visible")) return;
-        if (item.getBoundingClientRect().top < window.innerHeight * 0.96) {
-          revealItem(item);
+      document.querySelectorAll(".ledger-grid, .plates-grid, .directory-list, .product-duo").forEach((group) => {
+        group.querySelectorAll(".reveal").forEach((item, index) => {
+          item.style.setProperty("--reveal-delay", `${Math.min(index * 80, 240)}ms`);
+        });
+      });
+
+      const pending = [];
+      revealItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.92) {
+          item.classList.add("is-visible");
+        } else {
+          item.classList.add("reveal-pending");
+          pending.push(item);
         }
       });
-    } catch {
-      showAllRevealItems();
-    }
-  };
 
-  const scheduleReachedCheck = () => {
-    if (scrollFrame) return;
-    scrollFrame = window.requestAnimationFrame(revealReachedItems);
-  };
-
-  revealObserver = new IntersectionObserver(
-    (entries) => {
-      try {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            revealItem(entry.target);
-          }
-        });
-      } catch {
-        showAllRevealItems();
+      if (pending.length) {
+        revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              revealObserver?.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.06, rootMargin: "0px 0px -6% 0px" }
+        );
+        pending.forEach((item) => revealObserver.observe(item));
+        root.classList.add("reveal-enabled");
       }
-    },
-    { threshold: 0.04, rootMargin: "0px 0px -12% 0px" }
-  );
 
-  pendingItems.forEach((item) => revealObserver.observe(item));
-
-  // The enhancement class is added only after every observer and fallback is ready.
-  document.documentElement.classList.add("reveal-enabled");
-  window.addEventListener("scroll", scheduleReachedCheck, { passive: true });
-  window.addEventListener("pageshow", scheduleReachedCheck);
-  scheduleReachedCheck();
-};
-
-try {
-  enableRevealAnimations();
-  const handleMotionChange = (event) => {
-    if (event.matches) showAllRevealItems();
-  };
-
-  if (typeof motionPreference.addEventListener === "function") {
-    motionPreference.addEventListener("change", handleMotionChange);
+      onMediaChange(reduceMotion, (e) => {
+        if (e.matches) showAllReveals();
+      });
+    } catch {
+      showAllReveals();
+    }
   } else {
-    motionPreference.addListener(handleMotionChange);
+    showAllReveals();
   }
-} catch {
-  showAllRevealItems();
-}
+
+  // Contact / Support AJAX submission via Formspree (shared window.BDTForms)
+  const contactForm = document.querySelector(".contact-form");
+
+  function showToast(message, isError = false) {
+    const existing = document.getElementById("bdt-toast");
+    if (existing) existing.remove();
+
+    const toast = document.createElement("div");
+    toast.id = "bdt-toast";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
+    toast.textContent = message;
+
+    Object.assign(toast.style, {
+      position: "fixed",
+      bottom: "28px",
+      left: "50%",
+      transform: "translateX(-50%) translateY(14px)",
+      zIndex: "9999",
+      padding: "14px 22px",
+      borderRadius: "2px",
+      border: isError
+        ? "1px solid rgba(255, 110, 110, 0.55)"
+        : "1px solid rgba(217, 183, 126, 0.55)",
+      background: isError
+        ? "rgba(56, 12, 16, 0.95)"
+        : "rgba(13, 11, 16, 0.96)",
+      color: isError ? "#ffb8b8" : "#f4e2bd",
+      fontFamily: "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
+      fontSize: "0.78rem",
+      fontWeight: "600",
+      letterSpacing: "0.12em",
+      textTransform: "uppercase",
+      boxShadow: "0 16px 42px rgba(0, 0, 0, 0.65)",
+      opacity: "0",
+      transition: "opacity 240ms ease, transform 240ms ease",
+      width: "max-content",
+      maxWidth: "calc(100vw - 40px)",
+      whiteSpace: "normal",
+      overflowWrap: "anywhere",
+      boxSizing: "border-box",
+      pointerEvents: "none",
+    });
+
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        toast.style.opacity = "1";
+        toast.style.transform = "translateX(-50%) translateY(0)";
+      });
+    });
+
+    window.setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateX(-50%) translateY(8px)";
+      window.setTimeout(() => toast.remove(), 280);
+    }, isError ? 5000 : 3800);
+  }
+
+  if (contactForm && window.BDTForms) {
+    window.BDTForms.attach(contactForm, {
+      report: showToast,
+      sending: "Sending your message…",
+      success: "Message sent — we'll be in touch.",
+    });
+  }
+})();

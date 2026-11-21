@@ -60,7 +60,7 @@ window.BDTForms = {
           report(success + (changed ? ' Your newer draft has been kept.' : ''), false);
         } else {
           const messages = [];
-          const labels = { fullName: 'name', email: 'email address', message: 'inquiry', interest: 'help topic', inquiryType: 'inquiry type' };
+          const labels = { fullName: 'name', email: 'email address', message: 'inquiry', interest: 'help topic', inquiryType: 'inquiry type', supportTopic: 'support topic' };
           if (response.status === 422 && Array.isArray(data?.errors)) {
             for (const error of data.errors) {
               const name = error?.field;

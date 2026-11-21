@@ -75,7 +75,7 @@ test('network, rate limiting and malformed error bodies preserve draft and recov
   }
 });
 test('all inquiry pages load helper before their adapters; endpoint unchanged', () => {
-  for(const [page,adapter] of [['index.html','assets/site.js'],['contact.html','assets/site.js'],['connect/index.html','connect/scripts/consultation.js']]) {
+  for(const [page,adapter] of [['index.html','assets/site.js'],['contact.html','assets/site.js'],['add-me/support.html','assets/site.js'],['connect/index.html','connect/scripts/consultation.js']]) {
     const html=readFileSync(page,'utf8');assert.ok(html.indexOf('assets/form-handler.js')<html.indexOf(adapter));assert.match(html,/action="https:\/\/formspree.io\/f\/mojykkbw"/);
     assert.match(readFileSync(adapter,'utf8'),/window\.BDTForms\.attach/);
   }

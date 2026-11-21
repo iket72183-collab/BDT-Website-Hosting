@@ -904,6 +904,7 @@ select {
   background-repeat: no-repeat;
   cursor: pointer;
 }
+select::picker-icon { display: none; }
 select:has(option[value=""]:checked) { color: #968a92; }
 select option { background: #140d14; color: var(--text); }
 textarea { min-height: 148px; resize: vertical; }
